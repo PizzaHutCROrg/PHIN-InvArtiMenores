@@ -1,0 +1,279 @@
+﻿
+@{
+    ViewBag.Title = "Kardex";
+}
+
+<h2>Reporte Kardex</h2>
+
+@{
+    var descripcion = Session["desResArti"].ToString();
+}
+<label><strong style="font-size: 1.3em">@descripcion</strong></label>
+<hr />
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-primary alert-dismissible fade show" role="alert" style="width: fit-content;">
+        <strong>@TempData["Message"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="form-horizontal">
+    <!-- Campo para seleccionar Artículo -->
+    <div class="col-md-3">
+        <label class="form-label">Artículo:</label>
+        <select id="cbxArti" name="cbxArti" class="form-control" style="width: 250px;">
+            <option value="" disabled selected>--Seleccione--</option>
+            @foreach (var option in ViewBag.OptionsList as List<string>)
+            {
+                <option value="@option">@option</option>
+            }
+        </select>
+    </div>
+    <br />
+    <button id="filtrarBtn" class="btn btn-secondary">Filtrar</button>
+</div>
+<br />
+@*<div class="card mb-3">
+    <div class="card-header">
+        Información
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Código: <span id="codValue"></span></h5>
+        <p class="card-text">Descripción: <span id="descValue"></span></p>
+    </div>
+</div>*@
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Información:
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Código: <span id="codValue"></span></h5>
+                    <p class="card-text">Descripción: <span id="descValue"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+<div class="table-responsive">
+    <table id="jsGrid"></table>
+</div>
+
+<br />
+<br />
+
+
+    <script>
+
+    $.noConflict();
+        jQuery(document).ready(function ($) {
+            $('#cbxArti').select2({
+                placeholder: "--Seleccione--",
+                allowClear: true,
+                minimumResultsForSearch: 0, // Permite la búsqueda en cualquier caso.
+                width: '100%' // Establecer el ancho en 100% para que sea responsive
+            });
+
+
+        $("#jsGrid").jsGrid({
+            width: "100%",
+            height: "600px", //"auto",//
+            filtering: true,  // Habilitar el filtrado
+            inserting: false,
+            editing: false,// Permitir la edición directa en la tabla
+            sorting: true,
+            // paging: true,
+            autoload: true,
+            // viewrecords: true, // Muestra el número de registros
+            rownumbers: true,
+            rownumWidth: 40, // Ajusta el ancho de la columna de números de fila
+            pageSize: 20,//cuantos por página
+            pageButtonCount: 20,//cuantas lineas se ven sin scroll
+            shrinkToFit: false, // Asegura que las columnas encajen en el espacio disponible
+            loadIndication: true, // Mostrar una indicación de carga
+
+            //loadonce: true, // Asegura que los datos se cargan en el cliente para el ordenamiento
+
+            // deleteConfirm: "¿Está seguro de que desea eliminar este artículo menor?",
+
+             controller: {
+                  loadData: function(filter) {
+                    // Obtener los valores de los campos de filtro del formulario
+                     var codigo = $('#cbxArti option:selected').text();
+                     let codigos = codigo.split('-');
+                     $("#codValue").text(codigos[0]);
+                     $("#descValue").text(codigos[1]);
+                    // Añadir los filtros al objeto de filtro, junto con el campo y el orden de la ordenación
+                    return $.ajax({
+                        type: "POST",
+                       url: '@Url.Action("KarGetArticulo", "Report")',
+                        data: $.extend(filter, {
+                            codigo: codigo
+                        }),  // Extiende el filtro con los datos de filtrado
+                        dataType: "json",
+                        /*success: function (response) {//intento de traer info card
+                            // Suponiendo que 'response' contiene el costo y monto calculado
+                            // callback(response.cod, response.desc);
+                            // Mostrar la información en el card-body
+                            $("#informacion").html(response);
+                            // Mostrar el card-body
+                            $(".card").show();
+
+                            // Mostrar los valores adicionales (cod y desc) en el card
+                            $("#codValue").text(response.cod);
+                            $("#descValue").text(response.desc);
+
+                            // Devolver la lista de productos a jsGrid
+                            return response.ltsArticulos;
+                        },*/
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+                            mostrarMensaje('Ocurrió un error. Inténtelo de nuevo.', 'danger');
+                            return;
+                        }
+                    });
+                }
+             },
+
+             fields: [
+                 {
+                     title: "#",
+                     itemTemplate: function (_, item) {
+                         var index = $.inArray(item, $("#jsGrid").jsGrid("option", "data"));
+                         return index + 1;
+                     },
+                     width: 30,
+                     align: "center"
+                 },
+                 { name: "NumDoc", type: "number", width: 100, title: "Num. Documento", readOnly: true, align: "right", filtering: false, sorting: true },
+                 {
+                     name: "Comentario",
+                     type: "text",
+                     width: 250,
+                     title: "Movimiento",
+                     align: "left",
+                     readOnly: true,
+                     filtering: false
+                     // Personalización del campo de filtrado manteniendo el ícono de lupa y comportamiento predeterminado
+                   /*  filterTemplate: function () {
+                         var $input = this._filterInput = $("<input>").attr("type", "text")
+                             .addClass("jsgrid-filter-input");  // Añadir clase predeterminada para estilo
+
+                         return $input;
+                     },
+                     filterValue: function () {
+                         return this._filterInput.val();
+                     }*/
+                     //,sorting: true
+                 },
+                /* { name: "NomMateria", type: "text", width: 150, title: "Artículo", readOnly: true, align: "left" },*/
+                 {
+                     name: "Proveedor",
+                     type: "text",
+                     width: 200,
+                     title: "Proveedor",
+                     align: "left",
+                     readOnly: true,
+                     filtering: false
+                     // Personalización del campo de filtrado manteniendo el ícono de lupa y comportamiento predeterminado
+                     /*filterTemplate: function () {
+                         var $input = this._filterInput = $("<input>").attr("type", "text")
+                             .addClass("jsgrid-filter-input");  // Añadir clase predeterminada para estilo
+
+                         return $input;
+                     },
+                     filterValue: function () {
+                         return this._filterInput.val();
+                     }*/
+
+                 },
+                 { name: "Cantidad", type: "number", width: 100, title: "Cantidad", readOnly: true, align: "right", filtering: false },
+                 {
+                     name: "Costo", type: "number", width: 100, title: "Costo", readOnly: true, align: "right", filtering: false,
+                     itemTemplate: function (value) {
+                         // Formatear el valor con separadores de miles y dos decimales
+                         return value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+                     }
+                     /*, visible: false*/
+                 },
+                 {
+                     name: "Monto", type: "number", width: 100, title: "Monto", readOnly: true, align: "right", filtering: false,
+                     itemTemplate: function (value) {
+                         // Formatear el valor con separadores de miles y dos decimales
+                         return value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+                     }    },
+                 { name: "Motivo", type: "text", width: 100, title: "Motivo", readOnly: true, align: "left", filtering: false },
+                 {
+                     name: "Total", type: "number", width: 100, title: "Acumulado", readOnly: true, align: "right", filtering: false,
+                     itemTemplate: function (value) {
+                         // Formatear el valor con separadores de miles y dos decimales
+                         return value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+                     }
+                 },
+                /* { name: "NumTF", type: "number", width: 50, title: "NumTF", hidden: true, editable: false, editrules: { edithidden: false }, hidedlg: true },//prueba*/
+              /*   { type: "control", width: 50, editButton: false, deleteButton: false }*/
+                 // { label: 'Precio', name: 'precio', width: 100, formatter: 'currency', formatoptions: { prefix: '$' } },
+
+             ]
+         });
+        // Botón para aplicar el filtro
+            $("#filtrarBtn").on("click", function () {
+                $("#jsGrid").jsGrid("loadData"); // Recarga los datos con los nuevos filtros
+            });
+
+        //$("#sort").on("click", function () {
+        //    var field = $("#sortingField").val();
+        //    console.log("Sort Field:", field);
+        //    // $("#jsGrid").jsGrid("sort", field);
+        //    $("#jsGrid").jsGrid("loadData"); // Recarga los datos con los nuevos filtros
+        //});
+    });
+        // Función para mostrar mensajes personalizados en el div de alerta
+        function mostrarMensaje(mensaje, tipo) {
+            // console.log("Mostrar Mensaje", mensaje, tipo);
+            var alertClass = 'alert-' + tipo; // Ejemplo: 'alert-success', 'alert-danger', etc.
+
+            // Reiniciar el mensaje
+            $('#mensajeAlerta').removeClass('alert-success alert-danger alert-warning alert-primary')
+                .addClass(alertClass)        // Agregar la clase según el tipo de alerta
+                .show();                     // Mostrar el div de alerta
+
+            $('#mensajeTexto').text(mensaje); // Actualizar el texto del mensaje
+
+            // Asegurarse de que la alerta se oculta automáticamente después de 5 segundos
+            setTimeout(function () {
+                $('#mensajeAlerta').fadeOut();
+            }, 5000); // 5000 milisegundos = 5 segundos
+        }
+
+
+    </script>
+    <style>
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+            z-index: 9999; /* Asegura que el overlay esté encima de todo */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner img {
+            width: 100px; /* Tamaño del spinner */
+            height: 100px;
+        }
+
+    </style>
+
+

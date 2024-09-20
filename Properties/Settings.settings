@@ -15,15 +15,12 @@
     <Setting Name="ambienteTest" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="ConectionStringSync" Type="(Connection string)" Scope="Application">
+    <Setting Name="ConectionStringLogin" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;ConnectionString /&gt;
+  &lt;ConnectionString&gt;Data Source=172.16.20.16,5341;Initial Catalog=DB_ASIENTO_VENTAS_TEST;Persist Security Info=True;User ID =clickeat;Password=Cl1cke@T$&lt;/ConnectionString&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="GrupoAD" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">SP_AP_AbastecimientoArtMayca</Value>
+      <Value Profile="(Default)">Data Source=172.16.20.16,5341;Initial Catalog=DB_ASIENTO_VENTAS_TEST;Persist Security Info=True;User ID =clickeat;Password=Cl1cke@T$</Value>
     </Setting>
   </Settings>
 </SettingsFile>

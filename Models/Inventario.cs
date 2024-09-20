@@ -16,6 +16,7 @@ namespace InventarioArtMenores.Models
         public decimal MontoVenta { get; set; }
         public string Turno { get; set; }
         public string Tipo { get; set; }
+        public string UserName { get; set; }
         public ArticuloViewModel ObjArticulo { get; set; }
 
     }

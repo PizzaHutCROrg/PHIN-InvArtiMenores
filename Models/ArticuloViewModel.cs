@@ -17,6 +17,10 @@ namespace InventarioArtMenores.Models
         public bool Conteo { set; get; }
         public string CodRest { set; get; } = string.Empty;
         public int NumTF { set; get; } = 0;
+        //agregamos para calculos
+       // MontoVenta, CostoUni
+       public decimal MontoVenta { set; get; } = 0;
+        public decimal CostoUni { set; get; } = 0;
 
         public ArticuloViewModel() { }
     }

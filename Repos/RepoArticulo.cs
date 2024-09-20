@@ -14,9 +14,10 @@ namespace InventarioArtMenores.Repos
         bool ambienteTest = Properties.Settings.Default.ambienteTest; //si es 1 es xq es ambiente de test
         string pathLogs = Properties.Settings.Default.PathLog;//para los logs
 
-        public List<Articulo> GetListAllArticulo(string codrest)
+        public List<string> GetListAllArticulo(string codrest)//cargar el cbx de los artículos
         {
-            List<Articulo> lst = new List<Articulo>();
+            // List<Articulo> lst = new List<Articulo>();
+            List<string> lst = new List<string>();
             string tablaTest = "";
             if (ambienteTest)
             {
@@ -26,14 +27,15 @@ namespace InventarioArtMenores.Repos
             {
                 try
                 {
-                    string sentencia = "select top 20 * from UX_AbaListaArtMenTien"+ tablaTest + " where Tipo = 'Menores Nacionales' and CodRest =@CodRest order by NomMateria asc";
+                    //top 20
+                    string sentencia = "select CodMateria, NomMateria from UX_AbaListaArtMenTien" + tablaTest + " where Tipo like '%Menores%' and CodRest =@CodRest order by NomMateria asc";
                     SqlCommand cmd = new SqlCommand(sentencia, cnn);
                     cmd.Parameters.AddWithValue("@CodRest", codrest);
                     cnn.Open();
                     SqlDataReader registros = cmd.ExecuteReader();
                     while (registros.Read())
                     {
-                        Articulo obj = new Articulo();//objeto
+                        /*Articulo obj = new Articulo();//objeto
                         obj.CodMateria = registros["CodMateria"].ToString().Trim();
                         obj.NomMateria = registros["NomMateria"].ToString().Trim();
                         obj.CodRest = registros["CodRest"].ToString().Trim();
@@ -46,7 +48,8 @@ namespace InventarioArtMenores.Repos
                         obj.Maximo = Convert.ToDecimal(registros["Maximo"]);
                         obj.Conteo = Convert.ToBoolean(registros["Conteo"]);
                         obj.CodLinea = registros["CodLinea"].ToString().Trim();
-                        lst.Add(obj);
+                        lst.Add(obj);*/
+                        lst.Add(registros["CodMateria"].ToString().Trim()+"-"+ registros["NomMateria"].ToString().Trim());
                     }
                 }
                 catch (Exception ex)
@@ -83,7 +86,7 @@ namespace InventarioArtMenores.Repos
             {
                 try
                 {
-                    //quitar
+      
                     //top 30 50
                     //string sentencia = "select top 20 * from UX_AbaListaArtMenTien" + tablaTest + " where Tipo like '%Menores%' and CodRest =@CodRest order by NomMateria asc";
                     string sentencia = "select ";
@@ -92,7 +95,12 @@ namespace InventarioArtMenores.Repos
                     sentencia += "a.Factor,";
                     sentencia += "COALESCE(SUM(c.Cantidad), 0) AS Teorico,";
                     sentencia += "COALESCE(b.Fisico, 0) AS Fisico, ";
-                    sentencia += "COALESCE(b.Diferencia, 0) AS Diferencia, ";
+                    // sentencia += "COALESCE(b.Diferencia, -SUM(c.Cantidad)) AS Diferencia, ";
+                    sentencia += "CASE ";
+                    sentencia += "WHEN b.Diferencia IS NULL THEN COALESCE(-SUM(c.Cantidad), 0) ";
+                    sentencia += "WHEN b.Diferencia = 0 THEN  COALESCE(SUM(c.Cantidad), 0)-COALESCE(b.Fisico, 0) ";//"WHEN b.Diferencia = 0 THEN  COALESCE(-SUM(c.Cantidad), 0) ";
+                    sentencia += "ELSE b.Diferencia ";
+                    sentencia += "END AS Diferencia, ";
                     sentencia += "a.Estado, ";
                     sentencia += "a.Conteo ";
                     sentencia += "from ";

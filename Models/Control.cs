@@ -15,5 +15,6 @@ namespace InventarioArtMenores.Models
         public string Tipo { get; set; }
         public bool Cerrado { get; set; }
         public DateTime FechaCerrado { get; set; }
+        public string UserName { get; set; }
     }
 }

@@ -28,8 +28,8 @@ namespace InventarioArtMenores.Repos
             {
                 try
                 {
-                    sentencia = "insert into UX_ControlInventario" + tablaTest + " (NumTF,CodRest,Gerente,Responsable,Turno,Tipo) ";              
-                    sentencia += "values(@NumTF,@CodRest,@Gerente,@Responsable,@Turno,@Tipo) ";                    
+                    sentencia = "insert into UX_ControlInventario" + tablaTest + " (NumTF,CodRest,Gerente,Responsable,Turno,Tipo,UserName) ";              
+                    sentencia += "values(@NumTF,@CodRest,@Gerente,@Responsable,@Turno,@Tipo,@UserName) ";                    
                     SqlCommand cmd = new SqlCommand(sentencia, cnn);
                     cmd.Parameters.AddWithValue("@NumTF", arti.NumTF);
                     cmd.Parameters.AddWithValue("@CodRest", arti.CodRest);
@@ -37,7 +37,8 @@ namespace InventarioArtMenores.Repos
                     cmd.Parameters.AddWithValue("@Responsable", arti.Responsable);
                     cmd.Parameters.AddWithValue("@Turno", arti.Turno);
                     cmd.Parameters.AddWithValue("@Tipo", arti.Tipo);
-                  
+                    cmd.Parameters.AddWithValue("@UserName", arti.UserName);
+
                     cnn.Open();
                     res = cmd.ExecuteNonQuery();
                 }
@@ -63,10 +64,11 @@ namespace InventarioArtMenores.Repos
             return res;
         }
 
-        public Control GetControl(int numTF, string codRest, string tipo)//obtenemos el control del inventario
+        public int SearchControl(string codRest, string tipo)//buscamos si hay uno abierto
         {
             string sentencia = "";
             string tablaTest = "";
+            int existe = 0;
             Control obj = new Control();//objeto
             if (ambienteTest)
             {
@@ -77,9 +79,10 @@ namespace InventarioArtMenores.Repos
 
                 try
                 {
-                    sentencia = "select * from UX_ControlInventario" + tablaTest + " Where NumTF=@NumTF and CodRest=@CodRest and Tipo=@Tipo ";                   
+                    //7: Abierto
+                    sentencia = "select top 1 idControl from UX_ControlInventario" + tablaTest + " Where CodRest=@CodRest and Tipo=@Tipo and Estado =7 and cerrado = 0";                   
                     SqlCommand cmd = new SqlCommand(sentencia, cnn);
-                    cmd.Parameters.AddWithValue("@NumTF", numTF);
+                    //cmd.Parameters.AddWithValue("@NumTF", numTF);
                     cmd.Parameters.AddWithValue("@CodRest", codRest);
                     cmd.Parameters.AddWithValue("@Tipo", tipo);
 
@@ -87,13 +90,7 @@ namespace InventarioArtMenores.Repos
                     SqlDataReader registros = cmd.ExecuteReader();
                     while (registros.Read())
                     {
-                        obj.NumTF = Convert.ToInt32(registros["NumTF"]);
-                        obj.CodRest = registros["CodRest"].ToString().Trim();
-                        obj.Gerente = registros["Gerente"].ToString().Trim();
-                        obj.Responsable = registros["Responsable"].ToString().Trim();
-                        obj.Turno = registros["Turno"].ToString().Trim();
-                        obj.Tipo = registros["Tipo"].ToString().Trim();
-                        obj.Cerrado = Convert.ToBoolean(registros["Cerrado"].ToString());                                             
+                        existe = 1;                            
                     }
                 }
                 catch (Exception ex)
@@ -105,7 +102,7 @@ namespace InventarioArtMenores.Repos
                     //log
                     DateTime hoy = DateTime.Now;
                     using (StreamWriter writer = new StreamWriter(pathLogs, true))
-                    { writer.WriteLine("**Ocurrió un error GetControl() CodRest:" + codRest + " NumTF:" + numTF +" Tipo:"+tipo+ " fecha:" + hoy + " ex:" + ex.ToString()); }
+                    { writer.WriteLine("**Ocurrió un error GetControl() CodRest:" + codRest +" Tipo:"+tipo+ " fecha:" + hoy + " ex:" + ex.ToString()); }
                     //fin 
                 }
                 finally
@@ -115,7 +112,7 @@ namespace InventarioArtMenores.Repos
 
                 }
             }
-            return obj;
+            return existe;
         }
 
         public Control GetControlAbierto(string codRest, string tipo)//obtenemos el control del inventario abierto
@@ -148,6 +145,7 @@ namespace InventarioArtMenores.Repos
                         obj.Turno = registros["Turno"].ToString().Trim();
                         obj.Tipo = registros["Tipo"].ToString().Trim();
                         obj.Cerrado = Convert.ToBoolean(registros["Cerrado"].ToString());
+                        obj.UserName = registros["UserName"].ToString().Trim();
                     }
                 }
                 catch (Exception ex)
@@ -171,7 +169,7 @@ namespace InventarioArtMenores.Repos
             }
             return obj;
         }
-        public int CerrarControlInventario(int numTF, string codRest, string tipo, bool estado, int estadoMov)//actualizar la linea del artículo en el inventario
+        public int CerrarControlInventario(int numTF, string codRest, string tipo, bool estado, int estadoMov, string responsable)//actualizar la linea del artículo en el inventario
         {
             string sentencia = "", tablaTest = "";
             int res = 0;
@@ -185,7 +183,7 @@ namespace InventarioArtMenores.Repos
                 try
                 {
                     sentencia = "update UX_ControlInventario" + tablaTest + " set ";
-                    sentencia += "Cerrado= @Cerrado, FechaCerrado=GetDate(), estado=@estado  ";
+                    sentencia += "Cerrado= @Cerrado, FechaCerrado=GetDate(), estado=@estado, Responsable=@Responsable  ";
                     sentencia += "where NumTF=@NumTF and CodRest=@CodRest and Tipo=@Tipo ";
                     SqlCommand cmd = new SqlCommand(sentencia, cnn);
                     cmd.Parameters.AddWithValue("@Cerrado", estado);
@@ -193,6 +191,7 @@ namespace InventarioArtMenores.Repos
                     cmd.Parameters.AddWithValue("@NumTF", numTF);
                     cmd.Parameters.AddWithValue("@CodRest", codRest);
                     cmd.Parameters.AddWithValue("@Tipo", tipo);
+                    cmd.Parameters.AddWithValue("@Responsable", responsable);
                     cnn.Open();
                     res = cmd.ExecuteNonQuery();
                 }

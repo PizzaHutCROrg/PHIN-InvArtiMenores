@@ -55,18 +55,11 @@ namespace InventarioArtMenores.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        public string ConectionStringSync {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=172.16.20.16,5341;Initial Catalog=DB_ASIENTO_VENTAS_TEST;Persist Secu" +
+            "rity Info=True;User ID =clickeat;Password=Cl1cke@T$")]
+        public string ConectionStringLogin {
             get {
-                return ((string)(this["ConectionStringSync"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SP_AP_AbastecimientoArtMayca")]
-        public string GrupoAD {
-            get {
-                return ((string)(this["GrupoAD"]));
+                return ((string)(this["ConectionStringLogin"]));
             }
         }
     }

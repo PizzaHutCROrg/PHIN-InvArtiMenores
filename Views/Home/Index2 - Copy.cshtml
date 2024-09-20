@@ -1,0 +1,315 @@
+﻿
+@model List<InventarioArtMenores.Models.ArticuloViewModel>
+
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="form-horizontal">
+    @{
+        var numero = Session["NTF"]?.ToString(); /*ViewBag.NTF*/
+        var descripcion = Session["desResArti"].ToString();
+    }
+    <label><strong style="font-size: 1.3em">@descripcion</strong></label>
+    <hr />
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-primary alert-dismissible fade show" role="alert" style="width: fit-content;">
+            <strong>@TempData["Message"]</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div id="overlay" style="display:none;">
+        <div id="spinner" class="spinner">
+            <img src="~/assets/img/loading.gif" alt="Cargando..." />
+        </div>
+    </div>
+
+    @*@Html.Hidden("txtUrl", ViewBag.ProductId, new { @id = "txtUrl" })*@
+    @*<input type="hidden" name="txtNum" value="@ViewBag.Num" />
+        <input type="hidden" name="txCodR" value="@ViewBag.CodR" />*@
+
+
+    @*<input type="text" id="categoriaFiltro" placeholder="Filtrar por Categoría" />*@
+    <label>Número de TF: <strong style="font-size: 1.3em">@numero</strong></label>
+    @*<div id="mensaje"><strong></strong></div>*@
+    <br />
+    <table class="table-responsive">
+        <tr>
+            <td><label>Filtros:</label></td>
+            <td>
+                <select id="estadoFiltro">
+                    <option value="0">Todos</option>
+                    <option value="1">Activos</option>
+                    <option value="2">Sin Conteo</option>
+                    <option value="3">Con Conteo</option>
+                    <option value="4">Con Diferencia</option>
+                    <option value="5">Falta Conteo</option>
+                </select>
+            </td>
+            <td> <button id="filtrarBtn" class="btn btn-secondary">Filtrar</button></td>
+        </tr>
+        <tr><td></td></tr>
+        <tr>
+            <td><label>Cerrar Inventario:</label></td>
+            <td>
+                <select id="cerrarFiltro" class="form-control">
+                    <option value="">---Seleccione---</option>
+                    <option value="5">Cerrar con ajuste</option>
+                    <option value="6">Cerrar sin ajuste</option>
+                </select>
+            </td>
+            <td><button id="btnCierre" class="btn btn-color text-white font-weight-bold ">Cerrar Inventario</button></td>
+            @*btn-primary*@
+        </tr>
+
+    </table>
+</div>
+<br />
+<br />
+
+@*<div id="jsGrid"></div>*@
+<table id="jsGrid"></table>
+
+<br />
+<br />
+
+<!-- Botón para cerrar el inventario v1 -->
+@*<button id="btnCierre" class="btn btn-primary">Cerrar Inventario</button>*@
+
+
+<script>
+
+    $.noConflict();
+    jQuery(document).ready(function ($) {
+       // $("#jsGrid").hideCol("NumTF");
+         $("#jsGrid").jsGrid({
+             //width: "100%",
+             //height: "600px",
+             width: "100%",
+             height: "600px", //"auto",
+
+             filtering: true,  // Habilitar el filtrado
+             inserting: false,
+             editing: true,// Permitir la edición directa en la tabla
+             sorting: true,
+            // paging: true,
+             autoload: true,
+            // viewrecords: true, // Muestra el número de registros
+             rownumbers: true,
+             rownumWidth: 40, // Ajusta el ancho de la columna de números de fila
+
+            // datatype: 'local', // Temporalmente 'local' para cargar los datos manualmente v3
+
+             pageSize: 20,//cuantos por página
+             pageButtonCount: 20,//cuantas lineas se ven sin scroll
+
+            // deleteConfirm: "¿Está seguro de que desea eliminar este artículo menor?",
+
+             controller: {
+                 loadData: function (filter) {
+
+                     // Obtiene el valor del input externo
+                     var estadoFiltro = $("#estadoFiltro").val();
+                     // Añade los filtros al objeto de filtro
+                     filter.Estado = estadoFiltro;
+                      return  $.ajax({
+                         type: "GET",
+                         url: '@Url.Action("ObtenerArticulos", "Home")',
+                         data: filter, // Pasa los filtros al servidor
+                         dataType: "json"
+                     });
+
+                 },
+                  updateItem: function(item) {
+                     return $.ajax({
+                         type: "POST",
+                         url: '@Url.Action("ActualizarArticulos", "Home")',
+                         data: item,
+                         dataType: "json",
+                         success: function (response) {
+                             if (response.success) {
+                                 // Recargar la tabla
+                                 $("#jsGrid").jsGrid("loadData");
+                             } else {
+                                 alert("No se pudo actualizar el artículo menor");
+                             }
+                         },
+                         error: function () {
+                             alert("Error al actualizar el artículo menor");
+                         }
+                     });
+                 }
+
+             },
+
+             fields: [
+                 {
+                     title: "#",
+                     itemTemplate: function (_, item) {
+                         var index = $.inArray(item, $("#jsGrid").jsGrid("option", "data"));
+                         return index + 1;
+                     },
+                     width: 30,
+                     align: "center"
+                 },
+                 /*      { name: "CodMateria", type: "text", width: 60, title: "Código", readOnly: true, align: "left"*//*, filtering: true *//*},*/
+                 {
+                     name: "CodMateria",
+                     type: "text",
+                     width: 60,
+                     title: "Código",
+                     align: "left",
+                     readOnly: true,
+                     // Personalización del campo de filtrado manteniendo el ícono de lupa y comportamiento predeterminado
+                     filterTemplate: function () {
+                         var $input = this._filterInput = $("<input>").attr("type", "text")
+                             .addClass("jsgrid-filter-input");  // Añadir clase predeterminada para estilo
+
+                         return $input;
+                     },
+                     filterValue: function () {
+                         return this._filterInput.val();
+                     }
+                 },
+                /* { name: "NomMateria", type: "text", width: 150, title: "Artículo", readOnly: true, align: "left" },*/
+                 {
+                     name: "NomMateria",
+                     type: "text",
+                     width: 150,
+                     title: "Artículo",
+                     align: "left",
+                     readOnly: true,
+                     // Personalización del campo de filtrado manteniendo el ícono de lupa y comportamiento predeterminado
+                     filterTemplate: function () {
+                         var $input = this._filterInput = $("<input>").attr("type", "text")
+                             .addClass("jsgrid-filter-input");  // Añadir clase predeterminada para estilo
+
+                         return $input;
+                     },
+                     filterValue: function () {
+                         return this._filterInput.val();
+                     }
+                 },
+                 { name: "Factor", type: "number", width: 50, title: "Factor", readOnly: true, align: "right", filtering: false },
+                 { name: "Teorico", type: "number", width: 50, title: "Teórico", readOnly: true, align: "right", filtering: false/*, visible: false*/ },
+                 { name: "Fisico", type: "number", width: 50, title: "Físico", align: "right", filtering: false },
+                 { name: "Diferencia", type: "number", width: 50, title: "Diferencia", readOnly: true, align: "right" },
+                /* { name: "NumTF", type: "number", width: 50, title: "NumTF", hidden: true, editable: false, editrules: { edithidden: false }, hidedlg: true },//prueba*/
+                 { type: "control", width: 50, editButton: true, deleteButton: false }
+                 // { label: 'Precio', name: 'precio', width: 100, formatter: 'currency', formatoptions: { prefix: '$' } },
+
+             ]
+         });
+        // Botón para aplicar el filtro
+        $("#filtrarBtn").on("click", function () {
+            $("#jsGrid").jsGrid("loadData"); // Recarga los datos con los nuevos filtros
+        });
+
+        ////v1 sin tipo
+        //$("#btnCierre").on("click", function () {
+        //    // Obtener todos los datos de la tabla
+        //    var allData = $("#jsGrid").jsGrid("option", "data");
+        //    //var dat2 = JSON.stringify(allData);
+        //     //   console.log("JSON serialized jqGrid data:\n" + dat2);
+        //    // Aquí puedes hacer algo con todos los datos, por ejemplo, enviarlos al servidor
+        //    $.ajax({
+        //        type: "POST",
+        //         url: "/Home/CerrarInventario",
+        //       // data: JSON.stringify(allData),  // Envía todos los datos como JSON
+        //       // contentType: "application/json",
+        //        success: function (response) {
+        //            alert("Datos procesados exitosamente.");
+        //            // $("#jsGrid").jsGrid("loadData"); // Recarga los datos con los nuevos filtros
+        //            // Redirige a la misma vista de Index
+        //            window.location.href = "/Home/Index";
+        //        },
+        //        error: function (jqXHR, textStatus, errorThrown) {
+        //            alert("Error al procesar los datos: " + errorThrown);
+        //            console.log(jqXHR.responseText);  // Muestra la respuesta del servidor para más detalles
+        //        }
+        //    });
+        //});
+
+                //******************* boton de cancelar ******************************** */
+        $('#btnCierre').on('click', function () {
+            var cerrarFiltro = $("#cerrarFiltro").val();
+            // var cancelarFiltro = document.getElementById("cancelarFiltro").value;
+            if (cerrarFiltro === "") {
+                alert("Por favor, selecciona una opción antes de cancelar.");
+            } else {
+                $('#btnCierre').prop('disabled', true);
+                // Mostrar el overlay y el spinner
+                $("#overlay").show();
+                // Hacer una llamada Ajax para realizar la acción sin recargar la página
+                $.ajax({
+                    url: '@Url.Action("CerrarInventario", "Home")',
+                    type: 'POST',
+                    data: { tipo: cerrarFiltro },
+                    success: function(result) {
+                        // Manejar el resultado del servidor
+                        //alert('Elemento eliminado con éxito');
+                        // Cerrar el modal
+                       // $('#confirmModal').modal('hide');
+                        // Redirigir o actualizar la página según sea necesario
+                        window.location.href = "/Home/Index";
+                    },
+                    error: function(err) {
+                        alert('Ocurrió un error. Inténtalo de nuevo.');
+                    },
+                    complete: function () {
+                        // Ocultar el overlay y el spinner cuando la solicitud termine
+                        $("#overlay").hide();
+                    }
+                });
+            }
+            });
+
+
+
+        // Manejo del botón que procesa todos los datos
+        //$("#processButton").on("click", function () {
+        //    var allData = $("#jsGrid").jsGrid("option", "data");
+        //    // Aquí puedes hacer algo con todos los datos, por ejemplo, enviarlos al servidor
+        //    $.ajax({
+        //        type: "POST",
+        //        url: "/Home/ProcesarTodosLosDatos",
+        //        data: JSON.stringify(allData),  // Envía todos los datos como JSON
+        //        contentType: "application/json",
+        //        success: function (response) {
+        //            alert("Datos procesados exitosamente.");
+        //        },
+        //        error: function () {
+        //            alert("Error al procesar los datos.");
+        //        }
+        //    });
+        //});
+
+
+    });
+
+
+</script>
+<style>
+    #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+        z-index: 9999; /* Asegura que el overlay esté encima de todo */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .spinner img {
+        width: 100px; /* Tamaño del spinner */
+        height: 100px;
+    }
+
+</style>

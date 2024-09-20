@@ -1,0 +1,262 @@
+﻿
+@{
+    ViewBag.Title = "Saldos";
+}
+
+<h2>Reporte Saldos</h2>
+
+@{
+    var descripcion = Session["desResArti"].ToString();
+}
+<label><strong style="font-size: 1.3em">@descripcion</strong></label>
+<hr />
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-primary alert-dismissible fade show" role="alert" style="width: fit-content;">
+        <strong>@TempData["Message"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<button id="BtnReload" class="btn btn-secondary">Recargar Reporte</button>
+<br />
+
+<div class="table-responsive">
+    <table id="jsGrid"></table>
+</div>
+
+<br />
+<br />
+
+
+<script>
+
+    $.noConflict();
+        jQuery(document).ready(function ($) {
+        $("#jsGrid").jsGrid({
+            width: "auto",//"100%",
+            height: "600px", //"auto",//
+
+            filtering: true,  // Habilitar el filtrado
+            inserting: false,
+            editing: false,// Permitir la edición directa en la tabla
+            sorting: true,
+            // paging: true,
+            autoload: true,
+            // viewrecords: true, // Muestra el número de registros
+            rownumbers: true,
+            rownumWidth: 40, // Ajusta el ancho de la columna de números de fila
+            pageSize: 20,//cuantos por página
+            pageButtonCount: 20,//cuantas lineas se ven sin scroll
+            shrinkToFit: false, // Asegura que las columnas encajen en el espacio disponible
+            loadIndication: true, // Mostrar una indicación de carga
+
+            //loadonce: true, // Asegura que los datos se cargan en el cliente para el ordenamiento
+
+            // deleteConfirm: "¿Está seguro de que desea eliminar este artículo menor?",
+
+             controller: {
+                  loadData: function(filter) {
+                    // Añadir los filtros al objeto de filtro, junto con el campo y el orden de la ordenación
+                    return $.ajax({
+                        type: "POST",
+                       url: '@Url.Action("SalGetArticulo", "Report")',
+                        data: $.extend(filter, {
+                        }),  // Extiende el filtro con los datos de filtrado
+                        dataType: "json",
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+                            mostrarMensaje('Ocurrió un error. Inténtelo de nuevo.', 'danger');
+                            return;
+                        }
+                    });
+                }
+             },
+
+            fields: [
+                { type: "control", width: 50, editButton: false, deleteButton: false },
+                 {
+                     title: "#",
+                     itemTemplate: function (_, item) {
+                         var index = $.inArray(item, $("#jsGrid").jsGrid("option", "data"));
+                         return index + 1;
+                     },
+                     width: 50,
+                     align: "center"
+                 },
+                 {
+                     name: "CodMateria",
+                     type: "text",
+                     title: "Código",
+                     align: "left",
+                     readOnly: true,
+                     width: 100,
+                     // Personalización del campo de filtrado manteniendo el ícono de lupa y comportamiento predeterminado
+                     filterTemplate: function () {
+                         var $input = this._filterInput = $("<input>").attr("type", "text")
+                             .addClass("jsgrid-filter-input");  // Añadir clase predeterminada para estilo
+
+                         return $input;
+                     },
+                     filterValue: function () {
+                         return this._filterInput.val();
+                     }
+                 },
+                 {
+                     name: "NomMateria",
+                     type: "text",
+                     width: 300,
+                     title: "Artículo",
+                     align: "left",
+                     // width: auto,
+                     readOnly: true,
+                     // Personalización del campo de filtrado manteniendo el ícono de lupa y comportamiento predeterminado
+                     filterTemplate: function () {
+                         var $input = this._filterInput = $("<input>").attr("type", "text")
+                             .addClass("jsgrid-filter-input");  // Añadir clase predeterminada para estilo
+
+                         return $input;
+                     },
+                     filterValue: function () {
+                         return this._filterInput.val();
+                     }
+                 },
+                 { name: "Tipo", type: "text", width: 200, title: "Tipo", readOnly: true, align: "left", filtering: false },
+                 { name: "TipoNivelInv", type: "text", width: 200, title: "Tipo Nivel", readOnly: true, align: "left", filtering: false },
+                 {
+                     name: "Estado", type: "text", width: 100, title: "Estado", readOnly: true, align: "left", filtering: false,
+                     // Formatear la fecha utilizando itemTemplate
+                     itemTemplate: function (value) {
+                         if (value === true) {
+                             return "Activo";  // Mostrar campo vacío si la fecha es inválida o por defecto
+                         } else {
+                             return "Inactivo";  // Mostrar campo vacío si la fecha es inválida o por defecto
+                         }
+                     }
+                 },
+                 { name: "Minimo", type: "number", width: 100, title: "Minimo", readOnly: true, align: "right", filtering: false/*, visible: false*/ },
+                 { name: "Maximo", type: "number", width: 100, title: "Maximo", readOnly: true, align: "right", filtering: false },
+                 { name: "Cantidad", type: "number", width: 100, title: "Cantidad", readOnly: true, align: "right", filtering: false },
+                {
+                    name: "Costo", type: "number", width: 120, title: "Costo", readOnly: true, align: "right", filtering: false,
+                    itemTemplate: function (value) {
+                        // Formatear el valor con separadores de miles y dos decimales
+                        return value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+                    }   },
+                {
+                    name: "Monto", type: "number", width: 120, title: "Monto", readOnly: true, align: "right", filtering: false,
+                    itemTemplate: function (value) {
+                        // Formatear el valor con separadores de miles y dos decimales
+                        return value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+                    }   },
+                 { name: "UC_Cantidad", type: "number", width: 100, title: "Última Compra Cantidad", readOnly: true, align: "right", filtering: false },
+                {
+                    name: "UC_Costo", type: "number", width: 120, title: "Última Compra Costo", readOnly: true, align: "right", filtering: false,
+                    itemTemplate: function (value) {
+                        // Formatear el valor con separadores de miles y dos decimales
+                        return value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+                    }
+},
+                {
+                    name: "UC_Monto", type: "number", width: 120, title: "Última CompraMonto", readOnly: true, align: "right", filtering: false,
+                    itemTemplate: function (value) {
+                        // Formatear el valor con separadores de miles y dos decimales
+                        return value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+                    }
+},
+                 /* { name: "UC_Fecha", type: "text", width: 100, title: "UC Fecha", readOnly: true, align: "left", filtering: false },     */
+                 {
+                     name: "UC_Fecha",
+                     type: "text",
+                     title: "Última Compra Fecha",
+                     width: 150,
+                     readOnly: true,
+                     filtering: false,
+                     // Formatear la fecha utilizando itemTemplate
+                     itemTemplate: function (value) {
+                         // Convertir el valor de timestamp o string de fecha
+                         var date = new Date(parseInt(value.replace(/\/Date\((\d+)\)\//, '$1')));
+
+                         // Detectar si la fecha es inválida o es "1900-01-01"
+                         if (isNaN(date.getTime()) || date.getFullYear() === 1900) {
+                             return "";  // Mostrar campo vacío si la fecha es inválida o por defecto
+                         }
+
+                         // Si la fecha es válida, devolver el formato legible
+                         return date.toLocaleDateString("es-ES", { year: 'numeric', month: '2-digit', day: '2-digit' });
+                     }
+                 }
+
+                 // { label: 'Precio', name: 'precio', width: 100, formatter: 'currency', formatoptions: { prefix: '$' } },
+            ]
+            //,
+            //onDataLoaded: function () {
+            //    // Aplicar el redimensionado de columnas a las cabeceras de jsGrid
+            //    $(".jsgrid-header-row").resizableColumns({
+            //        store: window.store  // Permite guardar el estado del tamaño de las columnas
+            //    });
+            //}
+         });
+        // Botón para aplicar el filtro
+            $("#BtnReload").on("click", function () {
+                $("#jsGrid").jsGrid("loadData"); // Recarga los datos con los nuevos filtros
+            });
+
+        //$("#sort").on("click", function () {
+        //    var field = $("#sortingField").val();
+        //    console.log("Sort Field:", field);
+        //    // $("#jsGrid").jsGrid("sort", field);
+        //    $("#jsGrid").jsGrid("loadData"); // Recarga los datos con los nuevos filtros
+        //});
+    });
+        // Función para mostrar mensajes personalizados en el div de alerta
+        function mostrarMensaje(mensaje, tipo) {
+            // console.log("Mostrar Mensaje", mensaje, tipo);
+            var alertClass = 'alert-' + tipo; // Ejemplo: 'alert-success', 'alert-danger', etc.
+
+            // Reiniciar el mensaje
+            $('#mensajeAlerta').removeClass('alert-success alert-danger alert-warning alert-primary')
+                .addClass(alertClass)        // Agregar la clase según el tipo de alerta
+                .show();                     // Mostrar el div de alerta
+
+            $('#mensajeTexto').text(mensaje); // Actualizar el texto del mensaje
+
+            // Asegurarse de que la alerta se oculta automáticamente después de 5 segundos
+            setTimeout(function () {
+                $('#mensajeAlerta').fadeOut();
+            }, 5000); // 5000 milisegundos = 5 segundos
+        }
+
+
+</script>
+<style>
+    #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+        z-index: 9999; /* Asegura que el overlay esté encima de todo */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .spinner img {
+        width: 100px; /* Tamaño del spinner */
+        height: 100px;
+    }
+    .jsgrid-header-row th {
+        position: relative;
+    }
+
+    .jsgrid-header-row .resizable-columns {
+        border-right: 1px solid #ccc; /* Añadir un borde para mostrar los divisores */
+        cursor: col-resize;
+    }
+
+</style>
+
+
+@*<link href="~/Scripts/jqueryResizable/jquery.resizableColumns.css" rel="stylesheet" />
+<script src="~/Scripts/jqueryResizable/jquery.resizableColumns.js"></script>*@

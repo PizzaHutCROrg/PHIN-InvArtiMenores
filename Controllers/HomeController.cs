@@ -17,39 +17,77 @@ namespace InventarioArtMenores.Controllers
         RepoControl repoControl = new RepoControl();
         RepoInventario repoInv = new RepoInventario();
         RepoHistorico repoHist = new RepoHistorico();
+        RepoLocal repoLocal = new RepoLocal();
+        RepoUsuario repoUsuario = new RepoUsuario();
         public static string tipoInv = "Menores";
-
+       
         public ActionResult Index()
         {
-            //UserInvAM
-            Session["UserInvAM"] = "test";//quitar
+            // Session["codResArti"] = null;//código de la tienda seleccionada           
+            // Session["desResArti"] = null;
+
+            //Session["UserInvAM"] = "test";//quitar
             if (Session["UserInvAM"] == null)
             {
                 return RedirectToAction("Index", "Login");
             }
             else
             {
-                 string codRest = "40";//falta            
-                /*Control control = repoControl.GetControlAbierto(codRest, tipoInv);//verificamos si existe un inventario abierto para obtener el NumTF
-                ViewBag.Num = control.NumTF;
-                ViewBag.CodR = codRest;
-                List<ArticuloViewModel> articulos = new List<ArticuloViewModel>();
-                articulos = repoArti.GetListAllView(codRest, tipoInv, control.NumTF);//se envía el tipo, codRest y el numTF si encontró, sino será 0             
-                return View(articulos);*/
-                Session["CodRe"] = codRest;
+                //obtenemos la lista de los locales asociados
+               List<string> ltsCodRest = repoUsuario.GetUserLocal(Session["UserInvAM"].ToString());
+
+                ViewBag.Tiendas = new SelectList(repoLocal.GetAllLocalesCBX(ltsCodRest), "filtrocbx", "filtrocbx");
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Index(string cmbTiendas2) //HomeViewModel model //txtTienda
+        {
+            string[] words = cmbTiendas2.Split('-');
+            Session["codResArti"] = words[0];//código de la tienda seleccionada           
+            Session["desResArti"] = words[1];//código de la tienda seleccionada      
+            return RedirectToAction("Inventario");
+        }
+
+
+
+        public ActionResult Inventario()
+        {
+
+            //Session["UserInvAM"] = "test";//quitar
+            //Session["UserNomInvAM"] = "Yess-test";//quitar
+            //Session["codResArti"] = "36";//"40"; //quitar
+            //Session["desResArti"] = "Cartago"; //"Rohrmoser";///quitar
+
+
+            if (Session["UserInvAM"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            if (Session["codResArti"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                string codRest = Session["codResArti"].ToString();    
                 int num = 0;
                 Control control = repoControl.GetControlAbierto(codRest, tipoInv);//verificamos si existe un inventario abierto
                 if (control.NumTF == 0)
                 {
                     num = repoInv.GetInvNumTF(codRest, tipoInv);
+                   // TempData["Abierto"] = "No hay Inventario Abierto";
                 }
                 else
                 {
                     num = control.NumTF;
+                    ViewBag.txtResp = control.Responsable;
+                    TempData["txtRespon"] = control.Responsable;
+                    TempData["Abierto"] = "Inventario Abierto";
                 }
                     
                 Session["NTF"] = num;
-               // ViewBag.NTF = num;//quitar
                 return View();
             }
         }
@@ -57,7 +95,7 @@ namespace InventarioArtMenores.Controllers
        
         public List<ArticuloViewModel> ObtenerListaDeArticulos(string codRest, int txtNum)
         {
-            // Aquí tienes una lista estática de productos para propósitos de demostración
+            // Aquí se obtiene la lista de artículos
             List<ArticuloViewModel> articulos = new List<ArticuloViewModel>();
             articulos = repoArti.GetListAllView(codRest,tipoInv, txtNum);
             return articulos;
@@ -66,7 +104,7 @@ namespace InventarioArtMenores.Controllers
 
         public JsonResult ObtenerArticulos(string CodMateria, string NomMateria, decimal? Factor, decimal? Teorico, decimal? Fisico, decimal? Diferencia, string Estado /*,string CodRest, string txtNum, string txCodR*/)
         {
-            string codRestS = Session["CodRe"].ToString();
+            string codRestS = Session["codResArti"].ToString();
             Control control = repoControl.GetControlAbierto(codRestS, tipoInv);//verificamos si existe un inventario abierto para obtener el NumTF
             // Dato adicional que quieres enviar a la vista
             
@@ -92,7 +130,10 @@ namespace InventarioArtMenores.Controllers
                         articulos = articulos.Where(p => p.Diferencia != 0).ToList();
                         break;
                     case "5"://Falta Conteo (los artículos que se debe de hacer conteo y aún no se ha realizado)
-                        articulos = articulos.Where(p => p.Conteo == true && p.Diferencia == 0).ToList();
+                        articulos = articulos.Where(p => p.Conteo == true && p.Fisico == 0).ToList();
+                        break;
+                    case "6"://contados (los que se han agregado en el inventario se modificó el físico)
+                        articulos = articulos.Where(p => p.Fisico > 0).ToList();
                         break;
                     default:
                         break;
@@ -131,19 +172,12 @@ namespace InventarioArtMenores.Controllers
         }
 
         [HttpPost]
-        public JsonResult ActualizarArticulos(ArticuloViewModel arti)
+        public JsonResult ActualizarArticulos(ArticuloViewModel arti, string txtQuien)
         {
-            //var productoOriginal = productos.FirstOrDefault(p => p.Id == producto.Id);
-            //if (productoOriginal != null)
-            //{
-            //    productoOriginal.Nombre = producto.Nombre;
-            //    productoOriginal.Precio = producto.Precio;
-            //    productoOriginal.Cantidad = producto.Cantidad;
-            //}
-            // return Json(new { success = true });
-
+           // TempData["Abierto"] = "Inventario Abierto";
             int num = 0;
             bool banderaControl= false;
+            List<decimal> montoCalculado = new List<decimal>();
             Control control = repoControl.GetControlAbierto(arti.CodRest, tipoInv);//verificamos si existe un inventario abierto
             if(control.NumTF == 0)
             {
@@ -158,10 +192,11 @@ namespace InventarioArtMenores.Controllers
                 //insertamos en control
                 control.NumTF = num;
                 control.CodRest = arti.CodRest;
-                control.Gerente = "Christian";//falta
-                control.Responsable = "Yess"; //falta
-                control.Turno = "Diurno";//falta
+                control.Gerente = Session["UserNomInvAM"].ToString();
+                control.Responsable = txtQuien;
+                control.Turno = "Web"; 
                 control.Tipo = tipoInv;
+                control.UserName = Session["UserInvAM"].ToString();               
                 if (repoControl.NewControl(control) > 0)//insertó en la tabla de control
                 {
                     banderaControl = true;
@@ -178,36 +213,28 @@ namespace InventarioArtMenores.Controllers
             {
                 //buscar si la linea existe en el inventario
                 int existe = repoInv.ExisteArtiEnInventario(arti.CodRest, num, arti.CodMateria, tipoInv);//obtenemos si existe el número de línea
-               
-                //calculamos los montos
-                //teórico
-               // decimal teorico = repoHist.GetHistTeorico(arti.CodRest, arti.CodMateria);
-              //  arti.Teorico = teorico;
+
+                 //calculamos los montos
                 //diferencia
-                decimal diferencia = arti.Fisico-arti.Teorico;
+                decimal diferencia = arti.Fisico-arti.Teorico;       
+                //vamos a obtener costo y monto
+                montoCalculado = repoHist.GetMontoCalculado(arti.CodMateria, Session["codResArti"].ToString(), diferencia);
+                decimal montoCal = montoCalculado[1];
+                decimal costoCal = montoCalculado[0];
                 arti.Diferencia = diferencia;
-
-                //obtener el número de línea
-               // int numLinea = repoInv.GetInvNumLinea(arti.CodRest, num, tipoInv);
-
                 Inventario inv = new Inventario();
                 inv.NumTF = num;
                 inv.ObjArticulo = arti;
                 //inv.ObjArticulo.CodRest = arti.CodRest;
                 inv.FechaAudi = DateTime.Now;
-                inv.Gerente = "Christian";//falta
-                inv.Responsable = "Yess"; //falta
-                /* inv.ObjArticulo.CodMateria = arti.CodMateria;
-                inv.ObjArticulo.NomMateria = arti.NomMateria;
-                inv.ObjArticulo.Factor = arti.Factor;
-                inv.ObjArticulo.Teorico = arti.Teorico;
-                inv.ObjArticulo.Fisico = arti.Fisico;
-                inv.ObjArticulo.Diferencia = arti.Diferencia;*/
+                inv.Gerente = Session["UserNomInvAM"].ToString();
+                inv.Responsable = txtQuien;
                 inv.NumLinea = existe; 
-                inv.CostoUni = 0;//falta
-                inv.MontoVenta = 0;//falta
+                inv.CostoUni = costoCal;
+                inv.MontoVenta = montoCal;
                 inv.Tipo = tipoInv;
-                inv.Turno = "Diurno";//falta
+                inv.Turno = "";
+                inv.UserName =Session["UserInvAM"].ToString();
                                         
                 if (existe == 0)
                 {
@@ -215,7 +242,7 @@ namespace InventarioArtMenores.Controllers
                     //obtener el número de línea
                     inv.NumLinea = repoInv.GetInvNumLinea(arti.CodRest, num, tipoInv,arti.CodMateria);
 
-                    if (repoInv.AddInvArticulo(inv) == 0)
+                    if (repoInv.AddInvArticulo(inv) == 0)//insertamos la línea
                     {
                         TempData["Message"] = "Ocurrió un error, en el proceso de agregar la línea al inventario";
                         return Json(new { success = false });
@@ -242,20 +269,24 @@ namespace InventarioArtMenores.Controllers
         }
 
         [HttpPost]
-        public JsonResult CerrarInventario(int tipo)//List<ArticuloViewModel> articulos
+        public JsonResult CerrarInventario(int tipo, string txtQuien)//List<ArticuloViewModel> articulos
         {
-            string codRestS = Session["CodRe"].ToString();
-            //if (string.IsNullOrEmpty(codRestS)) { bandera = true; }
-            if(tipo == 0)
+            string codRestS = Session["codResArti"].ToString();
+            string UserName = Session["UserInvAM"].ToString();
+            if (tipo == 0)
             {
                 TempData["Message"] = "Ocurrió un error, no se cerró el inventario";
                 return Json(new { success = false });
+            }
+            if (string.IsNullOrEmpty(txtQuien))
+            {
+              txtQuien =  TempData["txtRespon"] as string;
             }
             Control control = repoControl.GetControlAbierto(codRestS, tipoInv);//verificamos si existe un inventario abierto
             if (control.NumTF > 0)
             {
                 //se debe de cerrar el inventario en control
-                if (repoControl.CerrarControlInventario(control.NumTF, codRestS, tipoInv, true, tipo ) == 0)
+                if (repoControl.CerrarControlInventario(control.NumTF, codRestS, tipoInv, true, tipo, txtQuien) == 0)
                 {
                     TempData["Message"] = "Ocurrió un error, no se cerró el control del inventario";
                     return Json(new { success = false });
@@ -264,6 +295,7 @@ namespace InventarioArtMenores.Controllers
                 //se debe de insertar todas las q se ingresaron el usuario y las q no a la tabla de inventario
                 List<ArticuloViewModel> todosArticulos = repoArti.GetListAllView(codRestS, tipoInv, control.NumTF);
                 List<Inventario> lstArticulos = new List<Inventario>();
+                List<decimal> montoCalculado = new List<decimal>();
                 int contador = repoInv.GetInvNumLinea(codRestS, control.NumTF, tipoInv, "XX");
                 foreach (var item in todosArticulos)
                 {
@@ -271,26 +303,32 @@ namespace InventarioArtMenores.Controllers
                     if (repoInv.ExisteArtiEnInventario(codRestS, control.NumTF,item.CodMateria, tipoInv) == 0)
                     {
                         contador++;
+                        //vamos a obtener costo y monto
+                        montoCalculado = repoHist.GetMontoCalculado(item.CodMateria, Session["codResArti"].ToString(), item.Diferencia);
+                        decimal montoCal = montoCalculado[1];
+                        decimal costoCal = montoCalculado[0];
                         //no existe la línea agregada en el inventario, se debe de insertar
                         //obtener el número de línea              
                         Inventario inv = new Inventario();
                         inv.NumTF = control.NumTF;
                         inv.ObjArticulo = item;
                         inv.FechaAudi = DateTime.Now;
-                        inv.Gerente = "Christian";//falta
-                        inv.Responsable = "Yess"; //falta                      
-                        //inv.NumLinea = repoInv.GetInvNumLinea(item.CodRest, control.NumTF, tipoInv,item.CodMateria);
+                        inv.Gerente = Session["UserNomInvAM"].ToString();
+                        inv.UserName = UserName;//Session["UserInvAM"].ToString();
+                        inv.Responsable = txtQuien;
                         inv.NumLinea =contador;
-                       inv.CostoUni = 0;//falta
-                        inv.MontoVenta = 0;//falta
+                        inv.CostoUni = costoCal;
+                        inv.MontoVenta = montoCal;
                         inv.Tipo = tipoInv;
-                        inv.Turno = "Diurno";//falta                        
-                        //repoInv.AddInvArticulo(inv);//insertar linea a linea
+                        inv.Turno = "Web";//falta                       
                         lstArticulos.Add(inv);//insertar la lista
                     }
                 }
+                //update del campo de Responsable del conteo, de las líneas ya agregadas  x el usuario 
+                //txtQuien
+                repoInv.UpdateInvResp(txtQuien, control.NumTF, codRestS);
                 //para insertar la lista
-                if (repoInv.AddInvLineaArticulo(lstArticulos) == 0)//poner si es beginTrans
+                if (repoInv.AddInvLineaArticulo(lstArticulos) == 0)// beginTrans
                 {
                     TempData["Message"] = "Ocurrió un error, cuando se agregaban al inventario";
                     return Json(new { success = false });
@@ -299,22 +337,22 @@ namespace InventarioArtMenores.Controllers
                 {
                    //obtener todas las líneas agregadas por el usuario al inventario, que sea diferencias != 0 para ser insertadas en el histórico
                     List<ArticuloViewModel> articulos = repoInv.GetAllArtiEnInventario(codRestS,control.NumTF, tipoInv);              
-                    if (repoHist.NewListHistorico(articulos) == 0)
+                    if (repoHist.NewListHistorico(articulos, UserName) == 0)
                     {
-                        repoControl.CerrarControlInventario(control.NumTF, codRestS, tipoInv, false, 7);
+                        repoControl.CerrarControlInventario(control.NumTF, codRestS, tipoInv, false, 7, txtQuien);
                         TempData["Message"] = "Ocurrió un error, en el proceso de agregar el cierre al histórico";
                         return Json(new { success = false });
-
                     }
-                }
+                }               
             }
             else
             {
                 TempData["Message"] = "No existe un inventario abierto, debe de abrir uno para realizar el cierre";
                 return Json(new { success = false });
             }
-
-           TempData["Message"] = "Se realizó el cierre de forma exitosa";
+            //actualizamos el estado del cierre en control
+           // repoControl.CerrarControlInventario(control.NumTF, codRestS, tipoInv, false, tipo);
+            TempData["Message"] = "Se realizó el cierre de forma exitosa";
            return Json(new { success = true });
         }
 
@@ -338,7 +376,7 @@ namespace InventarioArtMenores.Controllers
 
         //    return View();
         //}
-
+      
 
     }
 }
