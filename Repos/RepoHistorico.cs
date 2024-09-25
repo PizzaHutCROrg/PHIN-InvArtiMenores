@@ -344,7 +344,9 @@ namespace InventarioArtMenores.Repos
                 try
                 {
                     //top 30
-                    string sentencia = "select CodMateria, DesMateria, Cantidad, isnull(Costo, 0) Costo, isnull(Monto, 0) monto, Comentario, NumDoc, Proveedor, Motivo from UX_HistoricoMovimiento" + tablaTest + " where CodRest =@CodRest and CodMateria =@CodMateria "; //and TipoMov <> 1
+                    string sentencia = "select CodMateria, DesMateria, Cantidad, isnull(Costo, 0) Costo, isnull(Monto, 0) monto, Comentario, NumDoc, ";
+                    sentencia += "Proveedor, Motivo, SUM(Cantidad) OVER (ORDER BY FechaReg ROWS UNBOUNDED PRECEDING) AS AcumuladoCantidad, FechaReg ";
+                    sentencia += "from UX_HistoricoMovimiento" + tablaTest + " where CodRest =@CodRest and CodMateria =@CodMateria order by FechaReg desc"; 
                     SqlCommand cmd = new SqlCommand(sentencia, cnn);
                     cmd.Parameters.AddWithValue("@CodRest", codrest);
                     cmd.Parameters.AddWithValue("@CodMateria", codMateria);
@@ -365,7 +367,8 @@ namespace InventarioArtMenores.Repos
                         obj.NumDoc = registros["NumDoc"].ToString().Trim();
                         obj.Proveedor = registros["Proveedor"].ToString().Trim();
                         obj.Motivo = registros["Motivo"].ToString().Trim();
-                        //obj.Total = Convert.ToDecimal(registros["Monto"]);
+                        obj.Acumulado = Convert.ToDecimal(registros["AcumuladoCantidad"]);
+                        obj.FechaReg = Convert.ToDateTime(registros["FechaReg"]);
                         lst.Add(obj);
                     }
                 }

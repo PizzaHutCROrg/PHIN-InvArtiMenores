@@ -20,6 +20,7 @@ namespace InventarioArtMenores.Models.Report
         public decimal Costo { get; set; }
         //  [DisplayFormat(DataFormatString = "{0:n4}")]
         public decimal Monto { get; set; } = 0;
-        public decimal Total { get; set; } = 0;
+        public decimal Acumulado { get; set; } = 0;
+        public DateTime FechaReg { get; set; }
     }
 }

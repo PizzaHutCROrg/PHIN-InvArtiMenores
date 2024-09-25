@@ -69,37 +69,46 @@
         <div class="col-md-3">
             <p></p>
             <button id="btnCierre" class="btn btn-color text-white font-weight-bold" disabled>Cerrar Inventario</button>
+            @*<button type="button" id="btnConteo2" class="btn btn-color text-white font-weight-bold">Mostrar Conteo</button>*@
+        </div>
+    </div>
+    @*<div class="row mb-3">
+        <p></p>
+        <button type="button" id="btnConteo" class="btn btn-success" disabled>Mostrar Conteo</button>
+    </div>*@
+    @*<br />*@
+
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <label>Filtros:</label>
+            <select id="estadoFiltro">
+                <option value="0">Todos</option>
+                <option value="1">Activos</option>
+                <option value="2">Sin Conteo</option>
+                <option value="3">Con Conteo</option>
+                <option value="4">Con Diferencia</option>
+                <option value="5">Falta Conteo</option>
+                <option value="6">Contados</option>
+            </select>
+            <button type="button" id="filtrarBtn" class="btn btn-secondary">Filtrar</button>
+        </div>
+        <div class="col-md-3">
+            <button type="button" id="btnConteo" class="btn btn-success" disabled>Mostrar Conteo</button>
         </div>
     </div>
 
-        <div class="row mb-3">
-            <div class="col-md-3">
-                <label>Filtros:</label>
-                <select id="estadoFiltro">
-                    <option value="0">Todos</option>
-                    <option value="1">Activos</option>
-                    <option value="2">Sin Conteo</option>
-                    <option value="3">Con Conteo</option>
-                    <option value="4">Con Diferencia</option>
-                    <option value="5">Falta Conteo</option>
-                    <option value="6">Contados</option>
-                </select>
-                <button type="button" id="filtrarBtn" class="btn btn-secondary">Filtrar</button>
-            </div>
-        </div>
-
 </form>
-
-    <br />
     <!-- Contenedor para mostrar los mensajes de error -->
     @*<div id="error-message" style="color: red; display: none;"></div>*@
     <div id="error-message" class="alert alert-warning fade show" role="alert" style="display: none;"></div>
-
     <br />
-    <div class="table-responsive">
+    <!--<div class="table-responsive">-->
         @*<div id="jsGrid"></div>*@
-        <table id="jsGrid"></table>
-    </div>
+        <!--<table id="jsGrid"></table>
+    </div>-->
+<div class="table-container" style="height: 600px;">
+    <div id="jsGrid"></div>
+</div>
     <br />
     <br />
 
@@ -107,180 +116,161 @@
     @*<button id="btnCierre" class="btn btn-primary">Cerrar Inventario</button>*@
 
 
-    <script>
+<script>
 
     $.noConflict();
     jQuery(document).ready(function ($) {
         let isFirstUpdate = true;  // Variable para controlar si es la primera actualización
 
-        //intento de habilitar el btn
-        //v2
         // Inicialmente, deshabilitamos el botón
         let isGridUpdated = false;  // Variable para controlar si hubo una actualización en jsGrid
-        
+
+        let isConteo = false;
         // Inicialmente verificamos el valor de TempData["Abierto"]
         checkConditions();
-        //fin v2
-        //v1 no funcionó bien
-        //hAbierto
-       /* var abierto = $("#hAbierto").val();
-        // var cancelarFiltro = document.getElementById("cancelarFiltro").value;
-        if (abierto === "1") {
-            console.log("entro a abierto");
-            //btnCierre
-            //  $('#btnCierre').disabled = false;
-            $('#btnCierre').prop('disabled', false);
 
-        } else {
-            console.log("entro a cerrado");
-            $('#btnCierre').prop('disabled', true);
-           // $('#btnCierre').disabled = true;
-        }*/
 
        // $("#jsGrid").hideCol("NumTF");
-         $("#jsGrid").jsGrid({
-             //width: "100%",
-             //height: "600px",
-             width: "100%",
-             height: "600px", //"auto",
+        $("#jsGrid").jsGrid({
+            //width: "100%",
+            //height: "600px",
+            width: "100%",
+            height: "600px", //"auto",
 
-             filtering: true,  // Habilitar el filtrado
-             inserting: false,
-             editing: true,// Permitir la edición directa en la tabla
-             sorting: true,
+            filtering: true,  // Habilitar el filtrado
+            inserting: false,
+            editing: true,// Permitir la edición directa en la tabla
+            sorting: true,
             // paging: true,
-             autoload: true,
+            autoload: true,
             // viewrecords: true, // Muestra el número de registros
-             rownumbers: true,
-             rownumWidth: 40, // Ajusta el ancho de la columna de números de fila
+            rownumbers: true,
+            rownumWidth: 40, // Ajusta el ancho de la columna de números de fila
 
             // datatype: 'local', // Temporalmente 'local' para cargar los datos manualmente v3
 
-             pageSize: 20,//cuantos por página
-             pageButtonCount: 20,//cuantas lineas se ven sin scroll
-             shrinkToFit: true, // Asegura que las columnas encajen en el espacio disponible
+            pageSize: 20,//cuantos por página
+            pageButtonCount: 20,//cuantas lineas se ven sin scroll
+            shrinkToFit: true, // Asegura que las columnas encajen en el espacio disponible
 
-             // deleteConfirm: "¿Está seguro de que desea eliminar este artículo menor?",
-             // Intercepta el evento de validación fallida para deshabilitar el alert predeterminado
-             invalidNotify: function (args) {
-                 // Prevenir el comportamiento predeterminado del alert
-                 args.preventDefault();
+            // deleteConfirm: "¿Está seguro de que desea eliminar este artículo menor?",
+            // Intercepta el evento de validación fallida para deshabilitar el alert predeterminado
+            invalidNotify: function (args) {
+                // Prevenir el comportamiento predeterminado del alert
+                args.preventDefault();
 
-                 // Mostrar el mensaje de error en el contenedor personalizado
-                 $("#error-message")
-                     .text(args.errors[0].message)  // Mostrar el mensaje del primer error
-                     .show();
-             },
+                // Mostrar el mensaje de error en el contenedor personalizado
+                $("#error-message")
+                    .text(args.errors[0].message)  // Mostrar el mensaje del primer error
+                    .show();
+            },
 
-             controller: {
-                 loadData: function (filter) {
+            controller: {
+                loadData: function (filter) {
 
-                     // Obtiene el valor del input externo
-                     var estadoFiltro = $("#estadoFiltro").val();
-                     // Añade los filtros al objeto de filtro
-                     filter.Estado = estadoFiltro;
-                      return  $.ajax({
-                         type: "GET",
-                         url: '@Url.Action("ObtenerArticulos", "Home")',
-                         data: filter, // Pasa los filtros al servidor
-                         dataType: "json"
-                     });
+                    // Obtiene el valor del input externo
+                    var estadoFiltro = $("#estadoFiltro").val();
+                    // Añade los filtros al objeto de filtro
+                    filter.Estado = estadoFiltro;
+                    return $.ajax({
+                        type: "GET",
+                        url: '@Url.Action("ObtenerArticulos", "Home")',
+                        data: filter, // Pasa los filtros al servidor
+                        dataType: "json"
+                    });
 
-                 },
-                 updateItem: function (item) {
-                     console.log("Item actualizado:", item);
-                     var txtQuienRes = $("#txtQuien").val();
-                     return $.ajax({
-                         type: "POST",
-                         url: '@Url.Action("ActualizarArticulos", "Home")',
-                         //data: item,
-                         data: $.extend(item, {
-                             txtQuien: txtQuienRes
-                         }),
-                         dataType: "json",
-                         success: function (response) {
-                             if (response.success) {
-                                 // Mostrar el label "Iniciado" solo la primera vez
-                                 if (isFirstUpdate) {
-                                     $("#statusLabel").show();  // Mostrar el label
-                                     isFirstUpdate = false;  // Marcar que ya se realizó la primera actualización
-                                     //v2 habilitar btn
+                },
+                updateItem: function (item) {
+                    console.log("Item actualizado:", item);
+                    var txtQuienRes = $("#txtQuien").val();
+                    return $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("ActualizarArticulos", "Home")',
+                        //data: item,
+                        data: $.extend(item, {
+                            txtQuien: txtQuienRes
+                        }),
+                        dataType: "json",
+                        success: function (response) {
+                            if (response.success) {
+                                // Mostrar el label "Iniciado" solo la primera vez
+                                if (isFirstUpdate) {
+                                    $("#statusLabel").show();  // Mostrar el label
+                                    isFirstUpdate = false;  // Marcar que ya se realizó la primera actualización
+                                    //v2 habilitar btn
                                     // console.log("Item actualizado:", item);
-                                     isGridUpdated = true;  // Marcar que el jsGrid ha sido actualizado
-                                     checkConditions();     // Verificar las condiciones para habilitar el botón
-                                     //fin v2
-                                 }
-                                 //btnCierre
-                               //  $('#btnCierre').enable = true;
-                                 // Recargar la tabla
-                                 $("#jsGrid").jsGrid("loadData");
-                             } else {
-                                 alert("No se pudo actualizar el artículo menor");
-                             }
-                         },
-                         error: function () {
-                             alert("Error al actualizar el artículo menor");
-                         }
-                     });
-                 }
+                                    isGridUpdated = true;  // Marcar que el jsGrid ha sido actualizado
+                                    checkConditions();     // Verificar las condiciones para habilitar el botón
+                                    //fin v2
+                                }                
+                                // Recargar la tabla
+                                $("#jsGrid").jsGrid("loadData");
+                            } else {
+                                alert("No se pudo actualizar el artículo menor");
+                            }
+                        },
+                        error: function () {
+                            alert("Error al actualizar el artículo menor");
+                        }
+                    });
+                }
 
-             },
+            },
+            fields: [
+                {
+                    title: "#",
+                    itemTemplate: function (_, item) {
+                        var index = $.inArray(item, $("#jsGrid").jsGrid("option", "data"));
+                        return index + 1;
+                    },
+                    width: 30,
+                    align: "center",
+                    width: 50
+                },
+                /*      { name: "CodMateria", type: "text", width: 60, title: "Código", readOnly: true, align: "left"*//*, filtering: true *//*},*/
+                {
+                    name: "CodMateria",
+                    type: "text",
+                    width: 60,
+                    title: "Código",
+                    align: "left",
+                    readOnly: true,
+                    width: 100,
+                    // Personalización del campo de filtrado manteniendo el ícono de lupa y comportamiento predeterminado
+                    filterTemplate: function () {
+                        var $input = this._filterInput = $("<input>").attr("type", "text")
+                            .addClass("jsgrid-filter-input");  // Añadir clase predeterminada para estilo
 
-             fields: [
-                 {
-                     title: "#",
-                     itemTemplate: function (_, item) {
-                         var index = $.inArray(item, $("#jsGrid").jsGrid("option", "data"));
-                         return index + 1;
-                     },
-                     width: 30,
-                     align: "center",
-                     width: 50
-                 },
-                 /*      { name: "CodMateria", type: "text", width: 60, title: "Código", readOnly: true, align: "left"*//*, filtering: true *//*},*/
-                 {
-                     name: "CodMateria",
-                     type: "text",
-                     width: 60,
-                     title: "Código",
-                     align: "left",
-                     readOnly: true,
-                     width: 100,
-                     // Personalización del campo de filtrado manteniendo el ícono de lupa y comportamiento predeterminado
-                     filterTemplate: function () {
-                         var $input = this._filterInput = $("<input>").attr("type", "text")
-                             .addClass("jsgrid-filter-input");  // Añadir clase predeterminada para estilo
-
-                         return $input;
-                     },
-                     filterValue: function () {
-                         return this._filterInput.val();
-                     }
-                 },
+                        return $input;
+                    },
+                    filterValue: function () {
+                        return this._filterInput.val();
+                    }
+                },
                 /* { name: "NomMateria", type: "text", width: 150, title: "Artículo", readOnly: true, align: "left" },*/
-                 {
-                     name: "NomMateria",
-                     type: "text",
-                     width: 200,
-                     title: "Artículo",
-                     align: "left",
+                {
+                    name: "NomMateria",
+                    type: "text",
+                    width: 200,
+                    title: "Artículo",
+                    align: "left",
                     // width: auto,
-                     readOnly: true,
-                     // Personalización del campo de filtrado manteniendo el ícono de lupa y comportamiento predeterminado
-                     filterTemplate: function () {
-                         var $input = this._filterInput = $("<input>").attr("type", "text")
-                             .addClass("jsgrid-filter-input");  // Añadir clase predeterminada para estilo
+                    readOnly: true,
+                    // Personalización del campo de filtrado manteniendo el ícono de lupa y comportamiento predeterminado
+                    filterTemplate: function () {
+                        var $input = this._filterInput = $("<input>").attr("type", "text")
+                            .addClass("jsgrid-filter-input");  // Añadir clase predeterminada para estilo
 
-                         return $input;
-                     },
-                     filterValue: function () {
-                         return this._filterInput.val();
-                     }
-                 },
-                 { name: "Factor", type: "number", width: 50, title: "Factor", readOnly: true, align: "right", filtering: false, width: 100 },
-                 { name: "Teorico", type: "number", width: 50, title: "Teórico", readOnly: true, align: "right", filtering: false, width: 100/*, visible: false*/ },
+                        return $input;
+                    },
+                    filterValue: function () {
+                        return this._filterInput.val();
+                    }
+                },
+                { name: "Factor", type: "number", title: "Factor", readOnly: true, align: "right", filtering: false, width: 100, visible: false },
+                 { name: "Teorico", type: "number", title: "Teórico", readOnly: true, align: "right", filtering: false, width: 100, visible: false },
                  {
-                     name: "Fisico", type: "number", width: 50, title: "Físico", align: "right", filtering: false, width: 100,
+                     name: "Fisico", type: "number", title: "Físico", align: "right", filtering: false, width: 100,
                      validate: {
                          message: "Debe ser un número entero positivo o 0",
                          validator: function (value) {
@@ -295,6 +285,25 @@
                              return true;  // Indicar que la validación fue exitosa
                          }
                      }
+                     //,
+                     //itemTemplate: function (value, item) {
+                     //    // Crear un input para editar el campo de "Numero"
+                     //    var input = $("<input>").attr("type", "number").val(value);
+
+                     //    // Detectar si se presiona la tecla Enter en el campo "Numero"
+                     //    input.on("keydown", function (e) {
+                     //        if (e.which === 13) {  // Código de tecla Enter (13)
+                     //            // Actualizar el valor de la fila actual
+                     //            item.Numero = parseInt(input.val(), 10);
+
+                     //            // Actualizar la fila en jsGrid
+                     //            $("#jsGrid").jsGrid("updateItem", item);
+                     //        }
+                     //    });
+
+                     //    return input;
+                     //}
+
                      //v1 con alert
                      //validate: {
                      //    message: "El valor debe ser un número positivo",
@@ -322,12 +331,102 @@
                          return input;
                      }*/
                  },
-                 { name: "Diferencia", type: "number", width: 50, title: "Diferencia", readOnly: true, align: "right", filtering: false, width: 100 },
+                { name: "Diferencia", type: "number", width: 50, title: "Diferencia", readOnly: true, align: "right", filtering: false, width: 100, visible: false },
                 /* { name: "NumTF", type: "number", width: 50, title: "NumTF", hidden: true, editable: false, editrules: { edithidden: false }, hidedlg: true },//prueba*/
                  { type: "control", width: 50, editButton: true, deleteButton: false }
                  // { label: 'Precio', name: 'precio', width: 100, formatter: 'currency', formatoptions: { prefix: '$' } },
 
              ]
+             ,
+             onItemEditing: function (args) {
+                 // Detectar el evento keydown en los campos editables cuando una fila entra en modo edición
+                 setTimeout(function () {
+                     $(".jsgrid-edit-row input").off("keydown").on("keydown", function (e) {
+                         if (e.key === "Enter") {  // Detectar si se presionó Enter (en lugar de keyCode)
+                             e.preventDefault();  // Prevenir el comportamiento predeterminado
+
+                             console.log("Se presionó Enter");
+                             // Llamar a la función de finalizar edición
+                             //  $("#jsGrid").jsGrid("updateItem", args.item);  // Actualizar la fila editada //envía datos con fisico 0
+
+                             //funcionó con la siguiente:
+                             // Obtener el item que está siendo editado en la fila actual
+                             // Obtener el item actualizado de la fila en edición usando closest
+                             var item = $(this).closest(".jsgrid-edit-row").data("JSGridItem");
+                             console.log("Item actualizado con datos nuevos:", item);
+                             // Llamar a la función de finalizar edición con los datos correctos
+                             $("#jsGrid").jsGrid("updateItem", item);  // Actualizar la fila editada
+
+                             //trae el dato como Fisico:NaN así que no sabe q valor se ingresó
+                             /*console.log("Fila capturada:", args);
+                             // Obtener el valor actualizado del campo desde el input
+                             var updatedFisico = parseFloat($(".jsgrid-edit-row input[name='Fisico']").val());
+                            // var updatedCantidad = parseInt($(".jsgrid-edit-row input[name='Cantidad']").val(), 10);
+
+                             // Asignar los valores actualizados al item actual
+                             args.item.Fisico = updatedFisico;
+                             //args.item.Cantidad = updatedCantidad;
+
+                             // Llamar a la función de finalizar edición
+                             $("#jsGrid").jsGrid("updateItem", args.item);  // Actualizar la fila editada
+                             */
+                         }
+                     });
+                 }, 100);  // Usar setTimeout para asegurarse de que el DOM está listo
+             }
+             //onItemEditing: function (args) {
+             //    // Este evento se dispara cuando una fila entra en modo de edición
+
+             //    // Detectar el evento keydown en los campos editables
+             //    $(".jsgrid-edit-row input").off("keydown").on("keydown", function (e) {
+             //        if (e.which === 13) {  // Detectar si se presionó Enter (código de tecla 13)
+             //            e.preventDefault();  // Prevenir el comportamiento predeterminado
+
+             //            console.log("Se presionó Enter");
+             //            // Llamar a la función de finalizar edición
+             //            $("#jsGrid").jsGrid("updateItem", args.item);  // Actualizar la fila editada
+             //        }
+             //    });
+             //}
+
+             //onRefreshed: function () {
+             //    // Capturar el evento keydown después de que la tabla se refresca
+             //    $(".jsgrid-edit-row input").off("keydown").on("keydown", function (e) {
+             //        if (e.which === 13) {  // Detectar si se presionó Enter (código de tecla 13)
+             //            e.preventDefault();  // Prevenir el comportamiento predeterminado
+             //            console.log("Se presionó Enter");
+
+             //            // Obtener el item que está siendo editado en la fila actual
+             //            var item = $(this).closest(".jsgrid-edit-row").data("JSGridItem");
+             //            $("#jsGrid").jsGrid("updateItem", item);  // Actualizar la fila
+             //        }
+             //    });
+             //}
+
+             //onItemEditing: function (args) {
+             //    // Detectar cuando el usuario está en modo de edición
+             //    $(".jsgrid-edit-row input").on("keydown", function (e) { //jsgrid-cell
+             //        console.log("Entro.. ",e.which);
+             //        if (e.which === 13) {  // Detectar si se presionó Enter (código de tecla 13)
+             //            e.preventDefault();  // Evitar que se ejecute el comportamiento predeterminado
+             //            console.log("Actualizando fila:", args.item);
+             //            $("#jsGrid").jsGrid("updateItem", args.item);  // Finalizar la edición y actualizar
+             //        }
+             //    });
+             //}
+             //rowClick: function (args) {
+             //    // Activa la edición cuando se hace clic en la fila
+             //    this.editItem(args.item);
+
+             //    // Detectar el Enter en los campos de la fila editable
+             //    $(".jsgrid-edit-row input").on("keydown", function (e) {
+             //        if (e.which === 13) {  // Código de tecla Enter (13)
+             //            e.preventDefault();
+             //            // Simular clic en el botón de check (guardar cambios)
+             //            $("#jsGrid").jsGrid("updateItem", args.item);
+             //        }
+             //    });
+             //}
          });
 
         // Función para habilitar/deshabilitar el botón de envío
@@ -339,8 +438,10 @@
             // Habilitamos el botón solo si ambas condiciones se cumplen
             if (isAbierto || isGridUpdated) {
                 $("#btnCierre").prop("disabled", false);  // Habilitar el botón
+                $("#btnConteo").prop("disabled", false);  // Habilitar el botón
             } else {
                 $("#btnCierre").prop("disabled", true);   // Deshabilitar el botón
+                $("#btnConteo").prop("disabled", true);   // Deshabilitar el botón
             }
         }
 
@@ -384,7 +485,7 @@
         //});
 
                 //******************* boton de cancelar ******************************** */
-        $('#btnCierre').on('click', function (e) {
+        $('#btnCierre').on('click', function (e) { //btnConteo
 
             // Evitar que el formulario se envíe inmediatamente
             e.preventDefault();
@@ -436,6 +537,35 @@
             }
             });
 
+        // Manejar el clic en el botón "Conteo"
+        $("#btnConteo").on("click", function () {
+            // Supongamos que quieres mostrar la columna "Conteo" al hacer clic
+            var columnIsVisible = $("#jsGrid").jsGrid("fieldOption", "Teorico", "visible");
+            var columnIsVisible = $("#jsGrid").jsGrid("fieldOption", "Diferencia", "visible");
+            //var columnIsVisible = $("#jsGrid").jsGrid("fieldOption", "Teorico", "visible");
+
+            // Si la columna "Conteo" está oculta, la mostramos; de lo contrario, la ocultamos
+            if (!columnIsVisible) {
+                $("#jsGrid").jsGrid("fieldOption", "Teorico", "visible", true);  // Mostrar la columna
+                $("#jsGrid").jsGrid("fieldOption", "Diferencia", "visible", true);  // Mostrar la columna
+            }
+            /*else {
+                $("#jsGrid").jsGrid("fieldOption", "Teorico", "visible", false);  // Ocultar la columna
+            }*/
+
+            // Refrescar la tabla para aplicar los cambios
+             $("#jsGrid").jsGrid("refresh");
+
+            // Definir un filtro de ejemplo: Monto mínimo
+          /*  var filtro = {
+               cosa= $("#estadoFiltro").val("6")
+            };
+
+            // Recargar la tabla con el filtro aplicado
+            $("#jsGrid").jsGrid("loadData", filtro);*/
+            $("#estadoFiltro").val("6");
+            $("#jsGrid").jsGrid("loadData");
+        });
 
 
         // Manejo del botón que procesa todos los datos
@@ -468,7 +598,7 @@
     }
 
 
-    </script>
+</script>
     <style>
         #overlay {
             position: fixed;

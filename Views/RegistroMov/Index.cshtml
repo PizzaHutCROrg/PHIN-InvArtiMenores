@@ -748,7 +748,7 @@
        var num = $('#txtNumDoc').val();
         var num2 = $('#txtProv').val();
         var num3 =$('#cbxTipoMov').val();
-        var num4 = $('#txtMotivo').val();
+        var num4 = $('#txtMotivo').val();       
         var errorMotivo = document.getElementById('errorMotivo');
         //if ($('#txtNumDoc').val() === '' || $('#txtProv').val() === '' || $('#cbxTipoMov').val() === '' || $('#txtMotivo').val() === '') {
 
@@ -849,12 +849,12 @@
         $.each(detalles, function (index, detalle) {
             // Formatea el costo y el monto con separadores de miles y 4 decimales
             let costoFormateado = detalle.Costo.toLocaleString('en-US', {
-                minimumFractionDigits: 4,
+                minimumFractionDigits: 2,
                 maximumFractionDigits: 4
             });
 
             let montoFormateado = detalle.Monto.toLocaleString('en-US', {
-                minimumFractionDigits: 4,
+                minimumFractionDigits: 2,
                 maximumFractionDigits: 4
             });
             let contador = index + 1;
@@ -864,7 +864,7 @@
                                 <td>${detalle.CodMateria}</td>
                                 <td>${detalle.Cantidad}</td>
                                 <td>${costoFormateado}</td>
-                                  <td>${montoFormateado}</td>
+                                <td>${montoFormateado}</td>
                                 <td><button type="button" class="btn btn-primary" onclick="eliminarArticulo(${index})">Eliminar</button></td>
                             </tr>
                         `);
@@ -896,7 +896,7 @@
       //  $('#cbxArti').select2({ data: [] });  // Reinicia el select2 si es necesario
 
         // Asegurarse de que el dropdown esté listo para seleccionar un nuevo artículo
-        $('#cbxArti').append('<option value="" disabled selected>Seleccione un artículo</option>');
+        $('#cbxArti').append('<option value="" disabled selected>--Seleccione--</option>');
 
         // Actualiza visualmente el select con select2
         $('#cbxArti').trigger('change.select2');      

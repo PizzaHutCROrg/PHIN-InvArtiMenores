@@ -849,12 +849,12 @@
         $.each(detalles, function (index, detalle) {
             // Formatea el costo y el monto con separadores de miles y 4 decimales
             let costoFormateado = detalle.Costo.toLocaleString('en-US', {
-                minimumFractionDigits: 4,
+                minimumFractionDigits: 2,
                 maximumFractionDigits: 4
             });
 
             let montoFormateado = detalle.Monto.toLocaleString('en-US', {
-                minimumFractionDigits: 4,
+                minimumFractionDigits: 2,
                 maximumFractionDigits: 4
             });
             let contador = index + 1;
@@ -864,7 +864,7 @@
                                 <td>${detalle.CodMateria}</td>
                                 <td>${detalle.Cantidad}</td>
                                 <td>${costoFormateado}</td>
-                                  <td>${montoFormateado}</td>
+                                <td>${montoFormateado}</td>
                                 <td><button type="button" class="btn btn-primary" onclick="eliminarArticulo(${index})">Eliminar</button></td>
                             </tr>
                         `);

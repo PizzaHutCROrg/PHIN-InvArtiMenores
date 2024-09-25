@@ -69,7 +69,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            @Html.ActionLink("Seleccionar Tienda", "Index", "Home", new { area = "", language = "es" }, new { @class = "nav-link" })
+                            @Html.ActionLink("Seleccionar Restaurante", "Index", "Home", new { area = "", language = "es" }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("Inventario", "Inventario", "Home", new { area = "", language = "es" }, new { @class = "nav-link" })
@@ -92,7 +92,7 @@
                                     @Html.ActionLink("Saldos", "Saldos", "Report", new { area = "", language = "es" }, new { @class = "nav-link" })
                                 </li>
                                 @*<li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>*@
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>*@
                             </ul>
                         </li>
                     </ul>
@@ -100,6 +100,21 @@
                         <a>@Html.ActionLink("Cerrar sesión", "LogOut", "Login", new { area = "", language = "es" }, new { @class = "nav-link" })</a>
                     </form>
                 </div>
+            }
+            else
+            {
+                if (Session["UserInvAM"] != null)
+                {
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        </ul>
+                        <form class="d-flex" role="search">
+                            <a>@Html.ActionLink("Cerrar sesión", "LogOut", "Login", new { area = "", language = "es" }, new { @class = "nav-link" })</a>
+                        </form>
+                    </div>
+
+                }
+
             }
 
         </div>
@@ -109,7 +124,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Pizza Hut 1.13</p>
+            <p>&copy; @DateTime.Now.Year - Pizza Hut 1.16</p>
         </footer>
     </div>
 

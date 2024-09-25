@@ -30,6 +30,7 @@
                 <option value="@option">@option</option>
             }
         </select>
+        <span id="error" class="text-danger" style="display:none;">Debe seleccionar un Artículo.</span>
     </div>
     <br />
     <button id="filtrarBtn" class="btn btn-secondary">Filtrar</button>
@@ -149,7 +150,7 @@
                          var index = $.inArray(item, $("#jsGrid").jsGrid("option", "data"));
                          return index + 1;
                      },
-                     width: 30,
+                     width: 50,
                      align: "center"
                  },
                  { name: "NumDoc", type: "number", width: 100, title: "Num. Documento", readOnly: true, align: "right", filtering: false, sorting: true },
@@ -194,9 +195,10 @@
                      }*/
 
                  },
+                 { name: "Motivo", type: "text", width: 150, title: "Motivo", readOnly: true, align: "left", filtering: false },       
                  { name: "Cantidad", type: "number", width: 100, title: "Cantidad", readOnly: true, align: "right", filtering: false },
                  {
-                     name: "Costo", type: "number", width: 100, title: "Costo", readOnly: true, align: "right", filtering: false,
+                     name: "Costo", type: "number", width: 120, title: "Costo", readOnly: true, align: "right", filtering: false,
                      itemTemplate: function (value) {
                          // Formatear el valor con separadores de miles y dos decimales
                          return value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 4 });
@@ -204,19 +206,40 @@
                      /*, visible: false*/
                  },
                  {
-                     name: "Monto", type: "number", width: 100, title: "Monto", readOnly: true, align: "right", filtering: false,
-                     itemTemplate: function (value) {
-                         // Formatear el valor con separadores de miles y dos decimales
-                         return value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 4 });
-                     }    },
-                 { name: "Motivo", type: "text", width: 100, title: "Motivo", readOnly: true, align: "left", filtering: false },
-                 {
-                     name: "Total", type: "number", width: 100, title: "Acumulado", readOnly: true, align: "right", filtering: false,
+                     name: "Monto", type: "number", width: 120, title: "Monto", readOnly: true, align: "right", filtering: false,
                      itemTemplate: function (value) {
                          // Formatear el valor con separadores de miles y dos decimales
                          return value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 4 });
                      }
                  },
+                 {
+                     name: "Acumulado", type: "number", width: 105, title: "Acumulado", readOnly: true, align: "right", filtering: false,
+                     itemTemplate: function (value) {
+                         // Formatear el valor con separadores de miles y dos decimales
+                         return value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+                     }
+                 },                       
+                 {
+                     name: "FechaReg",
+                     type: "text",
+                     title: "Fecha",
+                     width: 150,
+                     readOnly: true,
+                     filtering: false,
+                     // Formatear la fecha utilizando itemTemplate
+                     itemTemplate: function (value) {
+                         // Convertir el valor de timestamp o string de fecha
+                         var date = new Date(parseInt(value.replace(/\/Date\((\d+)\)\//, '$1')));
+
+                         // Detectar si la fecha es inválida o es "1900-01-01"
+                         if (isNaN(date.getTime()) || date.getFullYear() === 1900) {
+                             return "";  // Mostrar campo vacío si la fecha es inválida o por defecto
+                         }
+
+                         // Si la fecha es válida, devolver el formato legible
+                         return date.toLocaleDateString("es-ES", { year: 'numeric', month: '2-digit', day: '2-digit' });
+                     }
+                 }
                 /* { name: "NumTF", type: "number", width: 50, title: "NumTF", hidden: true, editable: false, editrules: { edithidden: false }, hidedlg: true },//prueba*/
               /*   { type: "control", width: 50, editButton: false, deleteButton: false }*/
                  // { label: 'Precio', name: 'precio', width: 100, formatter: 'currency', formatoptions: { prefix: '$' } },
@@ -225,7 +248,23 @@
          });
         // Botón para aplicar el filtro
             $("#filtrarBtn").on("click", function () {
-                $("#jsGrid").jsGrid("loadData"); // Recarga los datos con los nuevos filtros
+
+                var isValid = true;
+                var codigo = $('#cbxArti option:selected').text();
+
+                if (codigo === '--Seleccione--') {
+                   // e.preventDefault(); // Detener el envío del formulario si no es válido
+                    error.style.display = 'block'; // Mostrar mensaje de error
+                    codigo = "";
+                    isValid = false;
+                    return;
+                    // console.log("02CBXARTI: ", codigo);
+                } else {
+                    error.style.display = 'none'; // Ocultar mensaje de error si es válido
+                }
+                if (isValid) {
+                    $("#jsGrid").jsGrid("loadData"); // Recarga los datos con los nuevos filtros
+                }               
             });
 
         //$("#sort").on("click", function () {

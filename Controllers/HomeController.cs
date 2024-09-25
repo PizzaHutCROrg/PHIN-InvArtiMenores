@@ -23,8 +23,8 @@ namespace InventarioArtMenores.Controllers
        
         public ActionResult Index()
         {
-            // Session["codResArti"] = null;//código de la tienda seleccionada           
-            // Session["desResArti"] = null;
+             Session["codResArti"] = null;//código de la tienda seleccionada           
+             Session["desResArti"] = null;
 
             //Session["UserInvAM"] = "test";//quitar
             if (Session["UserInvAM"] == null)
@@ -44,10 +44,15 @@ namespace InventarioArtMenores.Controllers
         [HttpPost]
         public ActionResult Index(string cmbTiendas2) //HomeViewModel model //txtTienda
         {
-            string[] words = cmbTiendas2.Split('-');
-            Session["codResArti"] = words[0];//código de la tienda seleccionada           
-            Session["desResArti"] = words[1];//código de la tienda seleccionada      
-            return RedirectToAction("Inventario");
+            if(cmbTiendas2 != null || !string.IsNullOrEmpty(cmbTiendas2)){
+                string[] words = cmbTiendas2.Split('-');
+                Session["codResArti"] = words[0];//código de la tienda seleccionada           
+                Session["desResArti"] = words[1];//código de la tienda seleccionada      
+                return RedirectToAction("Inventario");
+            }
+            TempData["Message"] = "Debe seleccionar un restaurante";
+            return View();
+           
         }
 
 

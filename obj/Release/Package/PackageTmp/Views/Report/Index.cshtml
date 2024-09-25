@@ -197,7 +197,18 @@
                  { type: "control", width: 50, editButton: false, deleteButton: false }
                  // { label: 'Precio', name: 'precio', width: 100, formatter: 'currency', formatoptions: { prefix: '$' } },
 
-             ]
+            ],
+            // Escuchar el evento keypress en los campos de filtro
+            onRefreshed: function (args) {
+                var $grid = this._grid;
+
+                // Capturar evento de Enter en los campos de filtro
+                $grid.find(".jsgrid-filter-row input").on("keypress", function (e) {
+                    if (e.which === 13) {  // Verifica si es Enter (keyCode 13)
+                        $("#jsGrid").jsGrid("loadData");  // Recargar los datos filtrados
+                    }
+                });
+            }
          });
         // Botón para aplicar el filtro
         $("#filtrarBtn").on("click", function () {

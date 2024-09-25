@@ -20,13 +20,14 @@
             <div class="form-group">
                 <div class="col-md-10">
                     Restaurante:
-                    <select id="cmbTiendas2" name="cmbTiendas2" style="width:max-content">
+                    <select id="cmbTiendas2" name="cmbTiendas2" style="width:max-content" class="form-control">
                         <option value="">--Seleccione--</option>
                         @foreach (var option in ViewBag.Tiendas)
                         {
                             <option value="@option.Value">@option.Text</option>
                         }
                     </select>
+                    <span id="error" class="text-danger" style="display:none;">Debe seleccionar un restaurante.</span>
                 </div>
             </div>
         </div>
@@ -48,15 +49,34 @@
 
 </main>
 <script>
-    $.noConflict();
+$.noConflict();
     jQuery(document).ready(function ($) {
         $('#cmbTiendas2').select2({
             placeholder: "--Seleccione--",
             allowClear: true,
             minimumResultsForSearch: 0 // Permite la búsqueda en cualquier caso.
         });
-    });
-   
+
+     $('#btnEnviar').on('click', function (e){ //btnConteo
+         // Evitar que el formulario se envíe inmediatamente
+       // e.preventDefault();
+         // Validar campos requeridos
+         var isValid = true;
+         var codigo = $('#cmbTiendas2 option:selected').text();
+
+         if (codigo === '--Seleccione--' ) {
+             e.preventDefault(); // Detener el envío del formulario si no es válido
+             error.style.display = 'block'; // Mostrar mensaje de error
+             codigo = "";
+             return;
+             // console.log("02CBXARTI: ", codigo);
+         } else {
+             error.style.display = 'none'; // Ocultar mensaje de error si es válido
+         }
+         //codigo === ""
+     });
+});
+
 
 </script>
 
