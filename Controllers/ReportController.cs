@@ -16,8 +16,7 @@ namespace InventarioArtMenores.Controllers
         RepoInventario repoInv = new RepoInventario();
         RepoHistorico repoHist = new RepoHistorico();
         public static string tipoInv = "Menores";
-        // GET: Report
-        // Acción que maneja la vista y aplica el filtro
+ 
         public ActionResult Index(string txtNumTF, DateTime? fechaInicio, DateTime? fechaFin)
         {
             //Session["UserInvAM"] = "test";//quitar

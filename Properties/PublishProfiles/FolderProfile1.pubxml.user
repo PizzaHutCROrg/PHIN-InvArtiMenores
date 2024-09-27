@@ -4,8 +4,8 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>C:\inetpub\wwwroot\Desarrollo\InvArticulosMenores</_PublishTargetUrl>
-    <History>True|2024-09-25T19:04:59.9230358Z;True|2024-09-25T10:04:36.7871604-06:00;True|2024-09-25T10:04:24.1461947-06:00;True|2024-09-25T08:50:56.3283552-06:00;True|2024-09-25T08:34:02.7594919-06:00;True|2024-09-24T09:39:45.6504833-06:00;True|2024-09-23T16:27:52.4678147-06:00;True|2024-09-20T16:51:21.7947265-06:00;True|2024-09-20T15:58:42.1494310-06:00;True|2024-09-20T15:57:51.7766415-06:00;True|2024-09-20T11:49:53.0718227-06:00;True|2024-09-19T13:10:01.6927613-06:00;True|2024-09-19T11:46:56.3718230-06:00;True|2024-09-18T16:48:48.8114016-06:00;True|2024-09-18T13:14:58.8218839-06:00;True|2024-09-18T12:55:50.8686814-06:00;True|2024-09-17T14:12:57.6392722-06:00;True|2024-09-17T12:12:02.3158723-06:00;True|2024-09-16T13:27:16.0509013-06:00;True|2024-09-12T14:16:33.1103842-06:00;True|2024-09-11T16:31:57.7800865-06:00;True|2024-09-11T16:23:28.6334038-06:00;True|2024-09-11T08:30:58.2497355-06:00;True|2024-09-09T10:13:04.8728029-06:00;True|2024-09-09T10:10:45.9919775-06:00;</History>
+    <_PublishTargetUrl>C:\inetpub\wwwroot\InvArtiMenores</_PublishTargetUrl>
+    <History>True|2024-09-25T19:10:47.4071016Z;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -40,10 +40,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/InventarioArtMenores.dll">
-      <publishTime>09/25/2024 13:04:59</publishTime>
+      <publishTime>09/25/2024 13:10:46</publishTime>
     </File>
     <File Include="bin/InventarioArtMenores.pdb">
-      <publishTime>09/25/2024 13:04:59</publishTime>
+      <publishTime>09/25/2024 13:10:46</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>09/05/2018 16:10:50</publishTime>
@@ -424,7 +424,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/05/2024 16:09:36</publishTime>
     </File>
     <File Include="Views/RegistroMov/Index.cshtml">
-      <publishTime>09/24/2024 18:29:14</publishTime>
+      <publishTime>09/25/2024 13:09:49</publishTime>
     </File>
     <File Include="Views/Report/Index.cshtml">
       <publishTime>09/24/2024 16:50:37</publishTime>
@@ -448,7 +448,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/08/2024 16:51:51</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/25/2024 13:04:59</publishTime>
+      <publishTime>09/25/2024 13:10:46</publishTime>
     </File>
   </ItemGroup>
 </Project>

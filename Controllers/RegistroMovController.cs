@@ -15,7 +15,6 @@ namespace InventarioArtMenores.Controllers
         RepoControl repoControl = new RepoControl();
         RepoTipoMov repoTipo = new RepoTipoMov();
         public static string tipoInv = "Menores";
-        // GET: RegistroMov
         public ActionResult Index()
         {
 

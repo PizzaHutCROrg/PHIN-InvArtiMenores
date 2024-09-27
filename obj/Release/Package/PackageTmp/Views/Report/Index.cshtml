@@ -34,6 +34,7 @@
     <div class="form-group">
         <label for="filtroNumTF">NumTF:</label>
         <input type="text" id="txtNumTF" name="txtNumTF" value="@ViewBag.FiltrotxtNumTF" placeholder="Filtrar por Número" />
+        <span id="error" class="text-danger" style="display:none;">Debe ingresar un Número de Toma Física.</span>
     </div>
     @*<div class="form-group">
             <label for="fechaInicio">Fecha de inicio:</label>
@@ -197,30 +198,34 @@
                  { type: "control", width: 50, editButton: false, deleteButton: false }
                  // { label: 'Precio', name: 'precio', width: 100, formatter: 'currency', formatoptions: { prefix: '$' } },
 
-            ],
-            // Escuchar el evento keypress en los campos de filtro
-            onRefreshed: function (args) {
-                var $grid = this._grid;
-
-                // Capturar evento de Enter en los campos de filtro
-                $grid.find(".jsgrid-filter-row input").on("keypress", function (e) {
-                    if (e.which === 13) {  // Verifica si es Enter (keyCode 13)
-                        $("#jsGrid").jsGrid("loadData");  // Recargar los datos filtrados
-                    }
-                });
-            }
+            ]           
          });
         // Botón para aplicar el filtro
         $("#filtrarBtn").on("click", function () {
-            $("#jsGrid").jsGrid("loadData"); // Recarga los datos con los nuevos filtros
+
+            var isValid = true;
+            var txtNum = $('#txtNumTF').val();
+
+            if (txtNum === "") {               
+                error.style.display = 'block'; // Mostrar mensaje de error
+                isValid = false;
+                return;
+            } else {
+                error.style.display = 'none'; // Ocultar mensaje de error si es válido
+            }
+            if (isValid) {
+                $("#jsGrid").jsGrid("loadData"); // Recarga los datos con los nuevos filtros
+            }
+            
         });
-        $("#sort").on("click", function () {
+
+      /*  $("#sort").on("click", function () {
             var field = $("#sortingField").val();
             console.log("Sort Field:", field);
             // $("#jsGrid").jsGrid("sort", field);
             $("#jsGrid").jsGrid("loadData"); // Recarga los datos con los nuevos filtros
         });
-
+        */
 
 
     });

@@ -10,8 +10,9 @@ namespace InventarioArtMenores.Repos
 {
     public class RepoUsuario
     {
-        string connectionString = Properties.Settings.Default.ConectionStringLogin;
-        bool ambienteTest = Properties.Settings.Default.ambienteTest; //si es 1 es xq es ambiente de test
+       // string connectionString = Properties.Settings.Default.ConectionStringLogin;//volver a poner Producción
+        string connectionString = Properties.Settings.Default.ConectionStringLoginTest;//quitar test
+        bool ambienteTest = Properties.Settings.Default.ambienteTest; //si es 1 es xq es ambiente de test      
         string pathLogs = Properties.Settings.Default.PathLog;//para los logs
 
         public Usuario Login(string cod, string pwd)//buscar el usuario, acceso
@@ -43,10 +44,10 @@ namespace InventarioArtMenores.Repos
                     cnn.Close();
                     ex.ToString();
                     DateTime hoy = DateTime.Now;
-                    //QUITAR
+                    //log
                     using (StreamWriter writer = new StreamWriter(pathLogs, true))
                     { writer.WriteLine("****Error Usuario Login() USER_NAME:" + cod + " fecha:" + hoy + " error: " + ex.ToString()); }
-                    //fin **QUITAR 
+                    //fin
                 }
                 finally
                 {
@@ -87,10 +88,10 @@ namespace InventarioArtMenores.Repos
                     cnn.Close();
                     ex.ToString();
                     DateTime hoy = DateTime.Now;
-                    //QUITAR
+                    //log
                     using (StreamWriter writer = new StreamWriter(pathLogs, true))
                     { writer.WriteLine("****Error Usuario Get() USER_NAME:" + cod + " fecha:" + hoy + " error: " + ex.ToString()); }
-                    //fin **QUITAR 
+                    //fin
                 }
                 finally
                 {
@@ -134,10 +135,10 @@ namespace InventarioArtMenores.Repos
                     cnn.Close();
                     ex.ToString();
                     DateTime hoy = DateTime.Now;
-                    //QUITAR
+                    //log
                     using (StreamWriter writer = new StreamWriter(pathLogs, true))
                     { writer.WriteLine("****Error Usuario Get() USER_NAME:" + cod + " fecha:" + hoy + " error: " + ex.ToString()); }
-                    //fin **QUITAR 
+                    //fin
                 }
                 finally
                 {

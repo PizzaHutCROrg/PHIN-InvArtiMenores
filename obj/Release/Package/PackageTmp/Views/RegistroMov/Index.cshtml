@@ -564,7 +564,7 @@
             // Reiniciar selects a su estado predeterminado (eliminar selección)
             // $('#cbxArti').val('').trigger('change');
             $('#cbxArti').val(null).trigger('change');  // Restablecer el select usando Select2
-            //quitar msj
+            //ocultar msj
             var errorMonto = document.getElementById('errorMonto');
             var errorMonto2 = document.getElementById('errorMonto2');
             var errorMonto3 = document.getElementById('errorMonto3');
@@ -748,7 +748,7 @@
        var num = $('#txtNumDoc').val();
         var num2 = $('#txtProv').val();
         var num3 =$('#cbxTipoMov').val();
-        var num4 = $('#txtMotivo').val();
+        var num4 = $('#txtMotivo').val();       
         var errorMotivo = document.getElementById('errorMotivo');
         //if ($('#txtNumDoc').val() === '' || $('#txtProv').val() === '' || $('#cbxTipoMov').val() === '' || $('#txtMotivo').val() === '') {
 
@@ -896,7 +896,7 @@
       //  $('#cbxArti').select2({ data: [] });  // Reinicia el select2 si es necesario
 
         // Asegurarse de que el dropdown esté listo para seleccionar un nuevo artículo
-        $('#cbxArti').append('<option value="" disabled selected>Seleccione un artículo</option>');
+        $('#cbxArti').append('<option value="" disabled selected>--Seleccione--</option>');
 
         // Actualiza visualmente el select con select2
         $('#cbxArti').trigger('change.select2');      

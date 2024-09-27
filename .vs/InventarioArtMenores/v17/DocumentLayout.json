@@ -3,16 +3,72 @@
   "WorkspaceRootPath": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\views\\registromov\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:views\\registromov\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|c:\\users\\yesseniamurillo\\source\\repos\\pizzahutcr\\phin-invartimenores\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\views\\report\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:views\\report\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\repos\\repohistorico.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:repos\\repohistorico.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\repos\\repoinventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:repos\\repoinventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\repos\\repolocal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:repos\\repolocal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\repos\\repotipomov.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:repos\\repotipomov.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\repos\\repocontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:repos\\repocontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\models\\articuloviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:models\\articuloviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\repos\\repoarticulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:repos\\repoarticulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\views\\home\\inventario.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:views\\home\\inventario.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|c:\\users\\yesseniamurillo\\source\\repos\\pizzahutcr\\phin-invartimenores\\properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}",
+      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\views\\registromov\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:views\\registromov\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\controllers\\registromovcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:controllers\\registromovcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\views\\report\\saldos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:views\\report\\saldos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\views\\report\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:views\\report\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\views\\report\\kardex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -21,34 +77,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|c:\\users\\yesseniamurillo\\source\\repos\\pizzahutcr\\phin-invartimenores\\views\\home\\inventario.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:views\\home\\inventario.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\controllers\\registromovcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:controllers\\registromovcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\views\\report\\saldos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:views\\report\\saldos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\repos\\repohistorico.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:repos\\repohistorico.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\models\\report\\kardexviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -63,22 +91,6 @@
       "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:models\\report\\saldosviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\repos\\repoarticulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:repos\\repoarticulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\models\\articuloviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:models\\articuloviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\repos\\repotipomov.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:repos\\repotipomov.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\models\\histomovenca.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:models\\histomovenca.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -87,24 +99,12 @@
       "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:models\\tipomovimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\repos\\repocontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:repos\\repocontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\models\\inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:models\\inventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\models\\control.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:models\\control.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\repos\\repolocal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:repos\\repolocal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\repos\\repousuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:repos\\repousuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -134,17 +134,17 @@
       "DocumentGroups": [
         {
           "DockedHeight": 418,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Controllers\\HomeController.cs",
               "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAQwDMAAAANAAAA",
+              "ViewState": "AQIAAIoAAAAAAAAAAAAAwJ8AAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-29T21:40:12.216Z",
               "IsPinned": true,
@@ -152,13 +152,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Inventario.cshtml",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Views\\Home\\Inventario.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Inventario.cshtml",
               "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Views\\Home\\Inventario.cshtml",
               "RelativeToolTip": "Views\\Home\\Inventario.cshtml",
-              "ViewState": "AQIAAPgBAAAAAAAAAAAAABkCAAAPAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-08-29T20:36:15.968Z",
               "IsPinned": true,
@@ -166,21 +166,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "ReportController.cs",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Controllers\\ReportController.cs",
               "RelativeDocumentMoniker": "Controllers\\ReportController.cs",
               "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Controllers\\ReportController.cs",
               "RelativeToolTip": "Controllers\\ReportController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAKMAAAAJAAAA",
+              "ViewState": "AQIAAKkAAAAAAAAAAAApwLwAAAA8AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-02T15:50:01.414Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 16,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Views\\Report\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Report\\Index.cshtml",
@@ -189,12 +188,11 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAABqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-09-02T17:09:28.156Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 17,
               "Title": "Kardex.cshtml",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Views\\Report\\Kardex.cshtml",
               "RelativeDocumentMoniker": "Views\\Report\\Kardex.cshtml",
@@ -203,59 +201,56 @@
               "ViewState": "AQIAAOwAAAAAAAAAAAAqwP8AAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-09-18T20:11:08.783Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "Saldos.cshtml",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Views\\Report\\Saldos.cshtml",
               "RelativeDocumentMoniker": "Views\\Report\\Saldos.cshtml",
               "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Views\\Report\\Saldos.cshtml",
               "RelativeToolTip": "Views\\Report\\Saldos.cshtml",
-              "ViewState": "AQIAAIcAAAAAAAAAAAAAAI4AAABxAAAA",
+              "ViewState": "AQIAALgAAAAAAAAAAAAawMcAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-09-19T23:41:47.788Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "RegistroMovController.cs",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Controllers\\RegistroMovController.cs",
               "RelativeDocumentMoniker": "Controllers\\RegistroMovController.cs",
               "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Controllers\\RegistroMovController.cs",
               "RelativeToolTip": "Controllers\\RegistroMovController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAABHAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAkwBcAAABHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-04T15:49:05.155Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 12,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Views\\RegistroMov\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\RegistroMov\\Index.cshtml",
               "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Views\\RegistroMov\\Index.cshtml",
               "RelativeToolTip": "Views\\RegistroMov\\Index.cshtml",
-              "ViewState": "AQIAAG8DAAAAAAAAAAAEwHsDAAA6AAAA",
+              "ViewState": "AQIAACoCAAAAAAAAAAAAADYCAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-09-04T15:54:36.159Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 4,
               "Title": "RepoTipoMov.cs",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoTipoMov.cs",
               "RelativeDocumentMoniker": "Repos\\RepoTipoMov.cs",
               "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoTipoMov.cs",
               "RelativeToolTip": "Repos\\RepoTipoMov.cs",
-              "ViewState": "AQIAAF0AAAAAAAAAAAAAAF0AAAAcAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAApwDAAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-05T22:36:12.502Z",
               "IsPinned": true,
@@ -267,33 +262,122 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RepoHistorico.cs",
+              "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoHistorico.cs",
+              "RelativeDocumentMoniker": "Repos\\RepoHistorico.cs",
+              "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoHistorico.cs",
+              "RelativeToolTip": "Repos\\RepoHistorico.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-04T15:44:33.409Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "RepoInventario.cs",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoInventario.cs",
               "RelativeDocumentMoniker": "Repos\\RepoInventario.cs",
               "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoInventario.cs",
               "RelativeToolTip": "Repos\\RepoInventario.cs",
-              "ViewState": "AQIAAN8BAAAAAAAAAAAxwO0BAAAUAAAA",
+              "ViewState": "AQIAALgAAAAAAAAAAAAqwNQAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-29T21:47:52.936Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RepoLocal.cs",
+              "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoLocal.cs",
+              "RelativeDocumentMoniker": "Repos\\RepoLocal.cs",
+              "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoLocal.cs",
+              "RelativeToolTip": "Repos\\RepoLocal.cs",
+              "ViewState": "AQIAAEkAAAAAAAAAAAApwGoAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-29T21:48:17.268Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RepoControl.cs",
+              "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoControl.cs",
+              "RelativeDocumentMoniker": "Repos\\RepoControl.cs",
+              "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoControl.cs",
+              "RelativeToolTip": "Repos\\RepoControl.cs",
+              "ViewState": "AQIAAHMAAAAAAAAAAAAAAIMAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-05T17:56:48.588Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ArticuloViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Models\\ArticuloViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ArticuloViewModel.cs",
+              "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Models\\ArticuloViewModel.cs",
+              "RelativeToolTip": "Models\\ArticuloViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-02T17:03:55.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 7,
+              "Title": "RepoArticulo.cs",
+              "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoArticulo.cs",
+              "RelativeDocumentMoniker": "Repos\\RepoArticulo.cs",
+              "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoArticulo.cs",
+              "RelativeToolTip": "Repos\\RepoArticulo.cs",
+              "ViewState": "AQIAAFEAAAAAAAAAAAAYwGwAAABIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-04T17:06:11.221Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "Controllers\\LoginController.cs",
+              "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "Controllers\\LoginController.cs",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAAADoAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-05T18:40:55.542Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Settings.settings",
+              "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Properties\\Settings.settings",
+              "RelativeDocumentMoniker": "Properties\\Settings.settings",
+              "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Properties\\Settings.settings",
+              "RelativeToolTip": "Properties\\Settings.settings",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002767|",
+              "WhenOpened": "2024-09-26T17:26:55.045Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAAFUAAAAAAAAAAAAqwHMAAAARAAAA",
+              "ViewState": "AQIAAHMAAAAAAAAAAAAqwH4AAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-18T22:48:26.966Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-18T22:48:26.966Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 18,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
@@ -301,24 +385,11 @@
               "RelativeToolTip": "Views\\Home\\Index.cshtml",
               "ViewState": "AQIAADEAAAAAAAAAAAAEwEQAAABHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-04T16:35:57.853Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-04T16:35:57.853Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "RepoHistorico.cs",
-              "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoHistorico.cs",
-              "RelativeDocumentMoniker": "Repos\\RepoHistorico.cs",
-              "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoHistorico.cs",
-              "RelativeToolTip": "Repos\\RepoHistorico.cs",
-              "ViewState": "AQIAAFEBAAAAAAAAAAAtwHEBAABWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T15:44:33.409Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 19,
               "Title": "KardexViewModel.cs",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Models\\Report\\KardexViewModel.cs",
               "RelativeDocumentMoniker": "Models\\Report\\KardexViewModel.cs",
@@ -330,7 +401,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 20,
               "Title": "jquery.resizableColumns.js",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Scripts\\jqueryResizable\\jquery.resizableColumns.js",
               "RelativeDocumentMoniker": "Scripts\\jqueryResizable\\jquery.resizableColumns.js",
@@ -342,7 +413,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 21,
               "Title": "SaldosViewModel.cs",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Models\\Report\\SaldosViewModel.cs",
               "RelativeDocumentMoniker": "Models\\Report\\SaldosViewModel.cs",
@@ -354,43 +425,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "RepoArticulo.cs",
-              "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoArticulo.cs",
-              "RelativeDocumentMoniker": "Repos\\RepoArticulo.cs",
-              "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoArticulo.cs",
-              "RelativeToolTip": "Repos\\RepoArticulo.cs",
-              "ViewState": "AQIAAHYAAAAAAAAAAAAAwIMAAABTAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T17:06:11.221Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "ArticuloViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Models\\ArticuloViewModel.cs",
-              "RelativeDocumentMoniker": "Models\\ArticuloViewModel.cs",
-              "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Models\\ArticuloViewModel.cs",
-              "RelativeToolTip": "Models\\ArticuloViewModel.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAIA4wBUAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-02T17:03:55.968Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "LoginController.cs",
-              "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Controllers\\LoginController.cs",
-              "RelativeDocumentMoniker": "Controllers\\LoginController.cs",
-              "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Controllers\\LoginController.cs",
-              "RelativeToolTip": "Controllers\\LoginController.cs",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAIwEQAAAA2AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-05T18:40:55.542Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 22,
               "Title": "HistoMovEnca.cs",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Models\\HistoMovEnca.cs",
               "RelativeDocumentMoniker": "Models\\HistoMovEnca.cs",
@@ -402,7 +437,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 23,
               "Title": "TipoMovimiento.cs",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Models\\TipoMovimiento.cs",
               "RelativeDocumentMoniker": "Models\\TipoMovimiento.cs",
@@ -414,19 +449,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "RepoControl.cs",
-              "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoControl.cs",
-              "RelativeDocumentMoniker": "Repos\\RepoControl.cs",
-              "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoControl.cs",
-              "RelativeToolTip": "Repos\\RepoControl.cs",
-              "ViewState": "AQIAAKIAAAAAAAAAAAAlwMEAAAA9AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-05T17:56:48.588Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 24,
               "Title": "Inventario.cs",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Models\\Inventario.cs",
               "RelativeDocumentMoniker": "Models\\Inventario.cs",
@@ -438,7 +461,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 25,
               "Title": "Control.cs",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Models\\Control.cs",
               "RelativeDocumentMoniker": "Models\\Control.cs",
@@ -450,37 +473,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "RepoLocal.cs",
-              "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoLocal.cs",
-              "RelativeDocumentMoniker": "Repos\\RepoLocal.cs",
-              "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoLocal.cs",
-              "RelativeToolTip": "Repos\\RepoLocal.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAwwCQAAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-29T21:48:17.268Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "RepoUsuario.cs",
-              "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoUsuario.cs",
-              "RelativeDocumentMoniker": "Repos\\RepoUsuario.cs",
-              "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoUsuario.cs",
-              "RelativeToolTip": "Repos\\RepoUsuario.cs",
-              "ViewState": "AQIAAEYAAAAAAAAAAAApwFwAAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-05T19:46:47.428Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 26,
               "Title": "Usuario.cs",
               "DocumentMoniker": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Models\\Usuario.cs",
               "RelativeDocumentMoniker": "Models\\Usuario.cs",
               "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Models\\Usuario.cs",
               "RelativeToolTip": "Models\\Usuario.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAAAqAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAIBJwA4AAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-05T18:43:59.255Z"
             },

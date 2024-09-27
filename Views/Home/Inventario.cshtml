@@ -82,8 +82,8 @@
         <div class="col-md-3">
             <label>Filtros:</label>
             <select id="estadoFiltro">
-                <option value="0">Todos</option>
                 <option value="1">Activos</option>
+                <option value="0">Todos</option>
                 <option value="2">Sin Conteo</option>
                 <option value="3">Con Conteo</option>
                 <option value="4">Con Diferencia</option>
@@ -210,7 +210,8 @@
                             }
                         },
                         error: function () {
-                            alert("Error al actualizar el artículo menor");
+                            //alert("Error al actualizar el artículo menor");
+                            window.location.href = "/Home/Index";
                         }
                     });
                 }

@@ -81,8 +81,7 @@ namespace InventarioArtMenores.Controllers
                 Control control = repoControl.GetControlAbierto(codRest, tipoInv);//verificamos si existe un inventario abierto
                 if (control.NumTF == 0)
                 {
-                    num = repoInv.GetInvNumTF(codRest, tipoInv);
-                   // TempData["Abierto"] = "No hay Inventario Abierto";
+                    num = repoInv.GetInvNumTF(codRest, tipoInv);//obtener el numTF que sigue
                 }
                 else
                 {
@@ -106,9 +105,12 @@ namespace InventarioArtMenores.Controllers
             return articulos;
         }
 
-
         public JsonResult ObtenerArticulos(string CodMateria, string NomMateria, decimal? Factor, decimal? Teorico, decimal? Fisico, decimal? Diferencia, string Estado /*,string CodRest, string txtNum, string txCodR*/)
         {
+            if (Session["UserInvAM"] == null || Session["codResArti"] == null)
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
             string codRestS = Session["codResArti"].ToString();
             Control control = repoControl.GetControlAbierto(codRestS, tipoInv);//verificamos si existe un inventario abierto para obtener el NumTF
             // Dato adicional que quieres enviar a la vista

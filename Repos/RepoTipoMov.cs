@@ -43,10 +43,10 @@ namespace InventarioArtMenores.Repos
                     cnn.Close();
                     ex.ToString();
                     DateTime hoy = DateTime.Now;
-                    //QUITAR
+                    //log
                     using (StreamWriter writer = new StreamWriter(pathLogs, true))
                     { writer.WriteLine("****Error GetTiposMovCBX()" + " fecha:" + hoy + " error: " + ex.ToString()); }
-                    //fin **QUITAR 
+                    //fin 
                 }
                 finally
                 {
@@ -91,10 +91,10 @@ namespace InventarioArtMenores.Repos
                     cnn.Close();
                     ex.ToString();
                     DateTime hoy = DateTime.Now;
-                    //QUITAR
+                    //log
                     using (StreamWriter writer = new StreamWriter(pathLogs, true))
                     { writer.WriteLine("****Error GetTiposMovCBX()" + " fecha:" + hoy + " error: " + ex.ToString()); }
-                    //fin **QUITAR 
+                    //fin 
                 }
                 finally
                 {
