@@ -15,6 +15,7 @@ namespace InventarioArtMenores.Models
         public string CodRest { get; set; }
         public List<HistoMov> Detalles { get; set; }
        // public HistoMov Detalles { get; set; }
+       public string Responsable { get; set; } = string.Empty;
 
     }
 }

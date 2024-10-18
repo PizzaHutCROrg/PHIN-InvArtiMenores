@@ -54,6 +54,8 @@
                     <img src="https://www.pizzahutcr.com/images_uploaded/Compania/3-Logo_compania-20230127161949.svg" style="height:73px; width: 219px" alt="logotipo" />
                     @*<img src="~/assets/img/3-Logo_compania-20230127161949.svg" style="height:73px; width: 219px" alt="logotipo" />*@
                 </a>
+                <!--quitar color-->
+                @*<a class="navbar-brand" asp-area="" style="background-color:lightblue">Pruebas</a>*@
             </p>
             @if (Session["UserInvAM"] == null)
             {
@@ -124,7 +126,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Pizza Hut 1.17</p>
+            <p>&copy; @DateTime.Now.Year - Pizza Hut 1.1 @*1.18*@</p>
         </footer>
     </div>
 

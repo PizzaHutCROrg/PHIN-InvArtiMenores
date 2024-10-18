@@ -40,22 +40,9 @@
         </div>
 
         <div class="row mb-3">
-            @*<h3 class="mb-4">Datos</h3>*@
-            <div class="col-md-3">
-                <label class="control-label" for="NumDoc">Número de documento:</label>
-                <input type="text" id="txtNumDoc" name="txtNumDoc" asp-for="NumDoc" maxlength="48" class="form-control" required="required" />
-            </div>
-            <div class="col-md-3">
-                <label class="control-label col-md-2" for="Proveedor">Proveedor:</label>
-                <input type="text" id="txtProv" name="txtProv" maxlength="100" asp-for="Proveedor" class="form-control" required="required" />
-            </div>
             <div class="col-md-3">
                 <label for="TipoMov">Tipo Movimiento:</label>
                 <div class="col-md-10">
-                    @*<select id="cbxTipoMov" name="cbxTipoMov" class="form-control" required="required">
-                            <option value="3">Entrada</option>
-                            <option value="4">Salida</option>
-                        </select>*@
                     <select id="cbxTipoMov" name="cbxTipoMov" class="form-control" required="required">
                         <option value="">--Seleccione--</option>
                         @foreach (var option in ViewBag.OptionsTipo as SelectList)
@@ -72,7 +59,77 @@
                     <span id="errorMotivo" class="text-danger" style="display:none;">El campo Motivo es obligatorio cuando el tipo es una Salida.</span>
                 </div>
             </div>
-        </div>
+            @*depende de la selección muestra los div´s *@
+            <div class="col-md-3" id="divNumDoc" hidden>
+                <label class="control-label" for="NumDoc">Número de documento:</label>
+                <input type="text" id="txtNumDoc" name="txtNumDoc" asp-for="NumDoc" maxlength="48" class="form-control" required="required" />
+            </div>
+            <div class="col-md-3" id="divProveedor" hidden>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <td><label class="control-label col-md-2" for="Proveedor">Proveedor:</label></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="txtProv" name="txtProv" class="form-control" required="required">
+                                    <option value="">-------Seleccione--------</option>
+                                    @foreach (var option in ViewBag.Prov as SelectList)
+                                    {
+                                        <option value="@option.Value">@option.Text</option>
+                                    }
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                    <!--<label class="control-label col-md-2" for="Proveedor">Proveedor:</label>-->
+                    @*<input type="text" id="txtProv" name="txtProv" maxlength="100" asp-for="Proveedor" class="form-control" required="required" />*@
+                    <!--<select id="txtProv" name="txtProv" class="form-control" required="required">
+            <option value="">---Seleccione---</option>
+            <option value="Mayca">Mayca</option>
+            <option value="Coca Cola">Coca Cola</option>
+            <option value="Otro">Otro</option>
+        </select>-->
+
+
+
+                </div>
+                <div class="col-md-3" id="divResponsable" hidden>
+                    <label class="control-label col-md-2" for="Responsable">Responsable:</label>
+                    <input type="text" id="txtResponsable" name="txtResponsable" maxlength="50" class="form-control" required="required" />
+                </div>
+                <div class="col-md-3" id="divCbxRest" hidden>
+                    <div class="table-responsive">
+                        <table>
+                            <tr>
+                                <td><label class="control-label col-md-2" for="Proveedor">Proveedor:</label></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select id="cbxRestaurante" name="cbxRestaurante" class="form-control" required="required">
+                                        <option value="">-------Seleccione--------</option>
+                                        @foreach (var option in ViewBag.Tiendas as SelectList)
+                                        {
+                                            <option value="@option.Value">@option.Text</option>
+                                        }
+                                    </select>
+                                    <span id="errorcbxRest" class="text-danger" style="display:none;">Seleccione un restaurante.</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    @*<label class="control-label col-md-2" for="Proveedor">Proveedor:</label>
+            <select id="cbxRestaurante" name="cbxRestaurante" class="form-control" required="required">
+                <option value="">-------Seleccione--------</option>
+                @foreach (var option in ViewBag.Tiendas as SelectList)
+                {
+                    <option value="@option.Value">@option.Text</option>
+                }
+            </select>
+            <span id="errorcbxRest" class="text-danger" style="display:none;">Seleccione un restaurante.</span>*@
+                </div>
+            </div>
         <hr />
         <div class="row mb-4">
             <h6 class="mb-2">Agregar Artículos</h6>
@@ -81,13 +138,13 @@
                 <label class="form-label">Artículo:</label>
                 <select id="cbxArti" name="cbxArti" class="form-control">
                     @*form-select select2*@
-                <option value="" disabled selected>--Seleccione--</option>
-                @foreach (var option in ViewBag.OptionsList as List<string>)
-                {
-                    <option value="@option">@option</option>
-                }
-            </select>
-            <span id="errorMonto3" class="text-danger" style="display:none;">Por favor, seleccione un artículo.</span>
+                    <option value="" disabled selected>--Seleccione--</option>
+                    @foreach (var option in ViewBag.OptionsList as List<string>)
+                    {
+                        <option value="@option">@option</option>
+                    }
+                </select>
+                <span id="errorMonto3" class="text-danger" style="display:none;">Por favor, seleccione un artículo.</span>
             </div>
 
 
@@ -110,38 +167,38 @@
                 <button type="button" class="btn btn-primary" id="agregarArticulo">Agregar Artículo</button>
             </div>
             @*<div class="col-md-12 mt-3">
-            <button type="button" class="btn btn-primary" id="agregarArticulo">Agregar Artículo</button>
-        </div>*@
+                    <button type="button" class="btn btn-primary" id="agregarArticulo">Agregar Artículo</button>
+                </div>*@
         </div>
 
 
         //******Tabla con los artículos*******
-          
-            <h6>Artículos Agregados</h6>
-            <div class="alert alert-info" role="alert" style="width: fit-content;">
-                <label for="totalMonto">Total Monto: </label>
-                <span id="totalMonto" class="font-weight-bold">0.00</span>
-            </div>          
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped mt-3" id="detalleArticulos">
-                    <thead class="table-light">
-                        <tr>
-                            <th>línea</th>
-                            <th>Artículo</th>
-                            <th>Cantidad</th>
-                            <th>Costo</th>
-                            <th>Monto</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Los artículos se mostrarán aquí -->
 
-                    </tbody>
-                </table>
-            </div>
-            <br />
-            <br />
+        <h6>Artículos Agregados</h6>
+        <div class="alert alert-info" role="alert" style="width: fit-content;">
+            <label for="totalMonto">Total Monto: </label>
+            <span id="totalMonto" class="font-weight-bold">0.00</span>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped mt-3" id="detalleArticulos">
+                <thead class="table-light">
+                    <tr>
+                        <th>línea</th>
+                        <th>Artículo</th>
+                        <th>Cantidad</th>
+                        <th>Costo</th>
+                        <th>Monto</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los artículos se mostrarán aquí -->
+
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <br />
 
     }
     @if (TempData["Message2"] != null)
@@ -168,212 +225,18 @@
             allowClear: true,
             minimumResultsForSearch: 0 // Permite la búsqueda en cualquier caso.
         });
+        $('#cbxRestaurante').select2({
+            placeholder: "-------Seleccione--------",
+            allowClear: true,
+            minimumResultsForSearch: 0 // Permite la búsqueda en cualquier caso.
+        });
+        //txtProv
+        $('#txtProv').select2({
+            placeholder: "-------Seleccione--------",
+            allowClear: true,
+            minimumResultsForSearch: 0 // Permite la búsqueda en cualquier caso.
+        });
 
-        //prueba
-
-        //const inputNumber = $("#input-number").val(); //document.getElementById('input-number');
-
-        //inputNumber.addEventListener('input', function () {
-        //    const value = this.value;
-        //    const decimalSeparator = '.';
-        //    const thousandSeparator = ',';
-
-        //    let formattedValue = '';
-        //    let decimalPart = '';
-
-        //    for (let i = 0; i < value.length; i++) {
-        //        if (value[i] === '.') {
-        //            decimalPart = value.substring(i + 1);
-        //            value = value.substring(0, i);
-        //            break;
-        //        }
-        //    }
-
-        //    const integerPart = value.replace(/\D+/g, '');
-
-        //    let integerPartFormatted = '';
-        //    for (let i = integerPart.length - 1; i >= 0; i--) {
-        //        if ((integerPart.length - i) % 3 === 0 && i !== integerPart.length - 1) {
-        //            integerPartFormatted = thousandSeparator + integerPartFormatted;
-        //        }
-        //        integerPartFormatted = integerPart[i] + integerPartFormatted;
-        //    }
-
-        //    if (decimalPart) {
-        //        formattedValue = integerPartFormatted + decimalSeparator + decimalPart;
-        //    } else {
-        //        formattedValue = integerPartFormatted;
-        //    }
-
-        //    this.value = formattedValue;
-        //});
-
-        //// Escuchar el evento de entrada en el input de costo
-        //$('#txtCosto').on('input', function () {
-        //    let inputVal = this.value;
-
-        //    // Eliminar cualquier formato de miles anterior
-        //    let cleanValue = inputVal.replace(/,/g, '');
-
-        //    // Convertir el valor limpio en un número flotante
-        //    let floatVal = parseFloat(cleanValue);
-
-        //    // Si el valor es un número válido, formatearlo con separadores de miles y decimales
-        //    if (!isNaN(floatVal)) {
-        //        this.value = floatVal.toLocaleString('en-US', {
-        //            minimumFractionDigits: 0,  // Número mínimo de decimales
-        //            maximumFractionDigits: 4   // Máximo de 4 decimales
-        //        });
-        //    } else {
-        //        // Si el valor no es un número, mantenerlo sin cambios (vacío o con texto inválido)
-        //        this.value = cleanValue;
-        //    }
-        //});
-
-        // Al detectar entrada en el campo de Costo
-        //$('#txtCosto').on('input', function () {
-        //    let inputVal = this.value;
-
-        //    // Eliminar cualquier formato de miles anterior (limpiar comas)
-        //    let cleanValue = inputVal.replace(/,/g, '').replace(/[^\d.-]/g, '');  // Limpiar caracteres inválidos
-
-        //    // Verificar que el valor ingresado no sea inválido
-        //    if (cleanValue === '' || cleanValue === '-' || cleanValue === '.' || cleanValue === '-.') {
-        //        this.value = cleanValue;  // Si es vacío o incompleto, no formateamos
-        //        return;
-        //    }
-
-        //    // Convertir el valor limpio en un número flotante
-        //    let floatVal = parseFloat(cleanValue);
-
-        //    // Si el valor es un número válido, formatearlo con separadores de miles y decimales
-        //    if (!isNaN(floatVal)) {
-        //        this.value = formatearNumero(floatVal);  // Formatear cuando es válido
-        //    }
-        //});
-
-        //// Evitar que el campo permita caracteres no numéricos, excepto "-" y "."
-        //$('#txtCosto').on('keydown', function (e) {
-        //    // Permitir teclas de control como retroceso, delete, flechas, tabulador
-        //    if ([46, 8, 9, 27, 13, 110, 190].indexOf(e.keyCode) !== -1 ||
-        //        (e.keyCode >= 35 && e.keyCode <= 40)) {
-        //        return;
-        //    }
-
-        //    // Permitir "-" solo al inicio del input (números negativos)
-        //    if (e.key === '-' && $(this).val().length === 0) {
-        //        return;
-        //    }
-
-        //    // Prevenir entrada de letras o caracteres no permitidos
-        //    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-        //        e.preventDefault();
-        //    }
-        //});
-
-        // Escuchar el evento de entrada en el input de Costo
-        //$('#txtCosto').on('input', function () {
-        //    let inputVal = this.value;
-
-        //    // Eliminar cualquier formato de miles anterior (limpiar comas)
-        //    let cleanValue = inputVal.replace(/,/g, '');  // Limpiar comas
-
-        //    // Permitir solo números y el punto decimal, y que no haya más de un punto decimal
-        //    cleanValue = cleanValue.replace(/[^\d.]/g, '');  // Solo números y punto
-        //    const parts = cleanValue.split('.');  // Separar por el punto decimal
-
-        //    // Asegurar que solo haya un punto decimal
-        //    if (parts.length > 2) {
-        //        cleanValue = parts[0] + '.' + parts[1];  // Mantener solo un punto decimal
-        //    }
-
-        //    // Convertir el valor limpio en un número flotante
-        //    let floatVal = parseFloat(cleanValue);
-
-        //    // Si el valor es un número válido, formatearlo con separadores de miles y decimales
-        //    if (!isNaN(floatVal)) {
-        //        this.value = formatearNumero(floatVal);  // Formatear el valor
-        //    } else {
-        //        this.value = cleanValue;  // Si no es un número válido, dejarlo como está
-        //    }
-        //});
-
-        ////// Evitar que el campo permita caracteres no numéricos, excepto "."
-        //$('#txtCosto').on('keydown', function (e) {
-        //    // Permitir teclas de control como retroceso, delete, flechas, tabulador, punto decimal (190 o 110)
-        //    if ([46, 8, 9, 27, 13, 110, 190].indexOf(e.keyCode) !== -1 ||
-        //        (e.keyCode >= 35 && e.keyCode <= 40)) {  // Flechas de movimiento
-        //        return;  // Permitir esas teclas
-        //    }
-
-        //    // Prevenir la entrada de caracteres no permitidos
-        //    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-        //        e.preventDefault();
-        //    }
-        //});
-
-        // Evento que se ejecuta mientras el usuario escribe en el input
-        //$('#txtCosto').on('input', function () {
-        //    // Obtenemos el valor actual sin comas y formateamos con separadores de miles
-        //    let inputVal = this.value.replace(/,/g, '');  // Eliminar comas existentes
-
-        //    // Limpiamos lo que no sea número o punto decimal
-        //    inputVal = inputVal.replace(/[^0-9.]/g, '');
-
-        //    // Si hay más de un punto decimal, limitamos a solo uno
-        //    let parts = inputVal.split('.');
-        //    if (parts.length > 2) {
-        //        inputVal = parts[0] + '.' + parts[1];  // Limitar a un solo punto decimal
-        //    }
-
-        //    // Formateamos el valor con separadores de miles y asignamos al input
-        //    this.value = formatearNumeroConMiles(inputVal);
-        //});
-
-        //da error Uncaught TypeError: invalid assignment to const 'value' pero si permite el . solo q si se abre la consola se encicla en el depurador con el error
-        /*document.getElementById('txtCosto').addEventListener('input', function (event) {
-         
-            const value = this.value;
-            const decimalSeparator = '.';
-            const thousandSeparator = ',';
-
-            let formattedValue = '';
-            let decimalPart = '';
-
-            // Buscamos el punto decimal y lo mantenemos en el valor formateado
-            //const decimalIndex = value.indexOf(decimalSeparator);
-            //if (decimalIndex !== -1) {
-            //    decimalPart = value.substring(decimalIndex + 1);
-            //    value = value.substring(0, decimalIndex);
-            //}
-            for (let i = 0; i < value.length; i++) {
-                if (value[i] === '.') {
-                    decimalPart = value.substring(i + 1);
-                    value = value.substring(0, i);
-                    break;
-                }
-            }
-
-            const integerPart = value.replace(/\D+/g, '');
-
-            let integerPartFormatted = '';
-            let counter = 0;
-            for (let i = integerPart.length - 1; i >= 0; i--) {
-                if (counter % 3 === 0 && counter !== 0) {
-                    integerPartFormatted = thousandSeparator + integerPartFormatted;
-                }
-                integerPartFormatted = integerPart[i] + integerPartFormatted;
-                counter++;
-            }
-
-            if (decimalPart) {
-                formattedValue = integerPartFormatted + decimalSeparator + decimalPart;
-            } else {
-                formattedValue = integerPartFormatted;
-            }
-
-            this.value = formattedValue;
-        });*/
         //dar formato de decimales y miles al costo que ingresa el usuario
         document.getElementById('txtCosto').addEventListener('input', function (event) {
             let value = this.value;
@@ -410,12 +273,6 @@
                 this.value = integerPartFormatted;
             }
         });
-
-
-
-        //fin prueba
-
-
         // Prevenir el envío solo si se está en un input y no en un botón de submit
         $('#ordenCompraForm input').on('keydown', function (event) {
             if (event.key === "Enter") {
@@ -432,11 +289,48 @@
                 // Deshabilitar campos Monto y Costo cuando se selecciona 'Salida'
                 // $('#Monto').prop('disabled', true);
                 $('#txtCosto').prop('disabled', true);
+                $('#divResponsable').prop('hidden', false);
             } else {
                 // Habilitar campos Monto y Costo si es 'Entrada'
                 // $('#Monto').prop('disabled', false);
                 $('#txtCosto').prop('disabled', false);
             }
+            //cambio form v3
+            switch (listaTipoFiltro[1]) {
+                case "8"://compras
+                    $('#divNumDoc').prop('hidden', false);
+                    $('#divProveedor').prop('hidden', false);
+                    //ocultar
+                    $('#divCbxRest').prop('hidden', true);
+                    $('#divResponsable').prop('hidden', true);
+                    break;
+                case "3": //traslado-entrada
+                    $('#divCbxRest').prop('hidden', false);
+                    //ocultar
+                    $('#divNumDoc').prop('hidden', true);
+                    $('#divProveedor').prop('hidden', true);
+                    $('#divResponsable').prop('hidden', true);
+                    break;
+                case "4"://traslado-salida
+                    $('#divCbxRest').prop('hidden', false);
+                    //ocultar
+                    $('#divNumDoc').prop('hidden', true);
+                    $('#divProveedor').prop('hidden', true);
+                    $('#divResponsable').prop('hidden', true);
+                    break;
+                case "9"://desecho
+                    $('#divResponsable').prop('hidden', false);
+                    //ocultar
+                    $('#divNumDoc').prop('hidden', true);
+                    $('#divProveedor').prop('hidden', true);
+                    $('#divCbxRest').prop('hidden', true);
+
+                    break;
+                default:
+                    console.log("");
+            }
+
+
         });
 
         //btnLimpiar
@@ -469,9 +363,9 @@
             if (listaTipoFiltro[0] === '3' && txtMotivo.trim() === '') {//cuando sea salida debe validar el campo de motivo
                 e.preventDefault(); // Evita el envío del formulario
                 $('#txtMotivo').addClass('is-invalid'); // Marca el campo como inválido
-              
+
                 errorMotivo.style.display = 'block'; // Mostrar mensaje de error
-               // $('</br> <span class="text-danger">El campo Motivo es obligatorio cuando es una Salida.</span>').insertAfter('#txtMotivo');
+                // $('</br> <span class="text-danger">El campo Motivo es obligatorio cuando es una Salida.</span>').insertAfter('#txtMotivo');
                 isValid = false;
             } else {
                 $('#txtMotivo').removeClass('is-invalid');
@@ -489,10 +383,35 @@
                 $("#overlay").show();
                 // this.submit(); // Enviar el formulario
 
-                var numeroOrden = $('#txtNumDoc').val();
-                var proveedor = $('#txtProv').val();
-                var cbxTipoMov = $("#cbxTipoMov").val();
+                //sin el cambio al form v2
+                /* var numeroOrden = $('#txtNumDoc').val();
+                 var proveedor = $('#txtProv').val();
+                 var cbxTipoMov = $("#cbxTipoMov").val();*/
                 //var proveedor = $('#txtProv').val();
+
+                //con cambio al form v3
+                var numeroOrden = "0";
+                var proveedor = "0";
+                var cbxTipoMov = $("#cbxTipoMov").val();
+                var responsable = "";
+
+                switch (listaTipoFiltro[1]) {
+                    case "8"://compras
+                        numeroOrden = $('#txtNumDoc').val();
+                        proveedor = $('#txtProv option:selected').text();     //$('#txtProv').val();
+                        break;
+                    case "3": //traslado-entrada
+                        proveedor = $('#cbxRestaurante option:selected').text();
+                        break;
+                    case "4"://traslado-salida
+                        proveedor = $('#cbxRestaurante option:selected').text();
+                        break;
+                    case "9"://desecho
+                        responsable = $('#txtResponsable').val();
+                        break;
+                    default:
+                        console.log("");
+                }
 
                 //console.log("Tipo2: ", cbxTipoMov);
 
@@ -506,23 +425,28 @@
                             Proveedor: proveedor,
                             Motivo: txtMotivo,
                             TipoMov: cbxTipoMov,
-                            Detalles: detalles
+                            Detalles: detalles,
+                            Responsable: responsable
                         }),
                         contentType: 'application/json',
                         success: function (response) {
-                            $("#overlay").hide();
                             // window.location.href = "/RegistroMov/Index";
-                            mostrarMensaje('Se registró el movimiento', 'success');
-                            // Limpiar el formulario después de un éxito
-                            reiniciarFormulario();
-                            habilitarEncabezado();
-                           
-
+                            // Evaluar si la respuesta es exitosa o no
+                            if (response.success) {
+                                $("#overlay").hide();                               
+                                // Limpiar el formulario después de un éxito
+                                reiniciarFormulario();
+                                habilitarEncabezado();
+                                mostrarMensaje('Se registró el movimiento', 'success'); // Mostrar mensaje satisfactorio
+                            } else {
+                                $("#overlay").hide();
+                                mostrarMensaje(response.message, 'danger');  // Mostrar mensaje de error
+                            }
                         },
-                        error: function (error) {
+                        error: function (xhr, status, error) {
                             $("#overlay").hide();
-                            mostrarMensaje('Ocurrió un error registrando el movimiento. Inténtelo de nuevo.', 'danger');
-                            return;
+                            mostrarMensaje('Error de red o servidor. Intente de nuevo.', 'danger');
+                           // return;
                         }
                     });
                 } else {
@@ -532,12 +456,12 @@
                     return;
                     //  $('</br> <span class="text-danger">Complete todos los campos y agregue al menos un artículo.</span>').insertAfter('#txtMotivo');
                 }
-            }          
+            }
         });//fin btnGuardar
-    
+
         // Función para mostrar mensajes personalizados en el div de alerta
         function mostrarMensaje(mensaje, tipo) {
-           // console.log("Mostrar Mensaje", mensaje, tipo);
+            // console.log("Mostrar Mensaje", mensaje, tipo);
             var alertClass = 'alert-' + tipo; // Ejemplo: 'alert-success', 'alert-danger', etc.
 
             // Reiniciar el mensaje
@@ -564,6 +488,8 @@
             // Reiniciar selects a su estado predeterminado (eliminar selección)
             // $('#cbxArti').val('').trigger('change');
             $('#cbxArti').val(null).trigger('change');  // Restablecer el select usando Select2
+            $('#cbxRestaurante').val(null).trigger('change');  // Restablecer el select usando Select2
+            $('#txtProv').val(null).trigger('change');  // Restablecer el select usando Select2
             //ocultar msj
             var errorMonto = document.getElementById('errorMonto');
             var errorMonto2 = document.getElementById('errorMonto2');
@@ -593,25 +519,23 @@
             }
         });
         // Escuchar cambios en el input para validar en tiempo real  //evitar negativos
-      /*  document.getElementById('txtCosto').addEventListener('input', function (event) {
-            var valor = event.target.value;
+        /*  document.getElementById('txtCosto').addEventListener('input', function (event) {
+              var valor = event.target.value;
 
-            // Validar que sea un número válido mientras escribe
-            if (!validarNumero(valor) && valor !== '') {
-                event.target.value = valor.slice(0, -1); // Eliminar el último carácter si es inválido
-            }
-        });
-        */
+              // Validar que sea un número válido mientras escribe
+              if (!validarNumero(valor) && valor !== '') {
+                  event.target.value = valor.slice(0, -1); // Eliminar el último carácter si es inválido
+              }
+          });
+          */
 
 
         //*******Manejo de tabla*********** */
 
         $('#agregarArticulo').click(function (e) {
 
-            if (ValidarEncabezado())
-            {
+            if (ValidarEncabezado()) {
                 // Obtén los valores del formulario
-                //var codigo = $('#cbxArti').val();
                 var codigo = $('#cbxArti option:selected').text();
                 var cantidad = $('#txtCantidad').val();
                 var costo = $('#txtCosto').val();
@@ -619,10 +543,10 @@
                 var monto = 0;
 
                 // console.log("costo: ", costo)
-             //   console.log("01CBXARTI: ", codigo);
+                //   console.log("01CBXARTI: ", codigo);
 
                 costo = obtenerValorLimpio(costo); //document.getElementById('Costo')
-              //  console.log('Valor limpio:', costo);  // Aquí el valor sin comas
+                //  console.log('Valor limpio:', costo);  // Aquí el valor sin comas
 
                 let listaTipoFiltro = tipo.split("-");//idcategoria-tipoMov
                 var txtMotivo = $("#txtMotivo").val();
@@ -651,11 +575,11 @@
                 } else {
                     errorMonto2.style.display = 'none'; // Ocultar mensaje de error si es válido
                 }
-                if (codigo === '--Seleccione--') {                  
+                if (codigo === '--Seleccione--') {
                     e.preventDefault(); // Detener el envío del formulario si no es válido
                     errorMonto3.style.display = 'block'; // Mostrar mensaje de error
                     codigo = "";
-                   // console.log("02CBXARTI: ", codigo);
+                    // console.log("02CBXARTI: ", codigo);
                 } else {
                     errorMonto3.style.display = 'none'; // Ocultar mensaje de error si es válido
                 }
@@ -668,30 +592,30 @@
                             // console.log("MontoCalculado: ", montoCalculado);
                             costo = costoCalculado;
                             monto = montoCalculado;
-                           // let monto = montoCalculado;
+                            // let monto = montoCalculado;
                             agregarDetalle(codigo, cantidad, costo, monto);
                             // Sumar el monto al total
                             totalMonto += monto;
-                          //  console.log("1. totalMonto: ", totalMonto , "  monto:",monto);
+                            //  console.log("1. totalMonto: ", totalMonto , "  monto:",monto);
                             actualizarTotal();  // Actualizamos el label con el nuevo total
                         });
                     } else {
                         // Valida que los valores sean números válidos
-                      //  if (!isNaN(cantidad) && !isNaN(costo)) {
-                            let monto = cantidad * costo;  // Calculamos el monto     
-                            // Sumar el monto al total
-                            totalMonto += monto;
-                           // console.log("2. totalMonto: ", totalMonto, "  monto:", monto);
-                            actualizarTotal();  // Actualizamos el label con el nuevo total
-                       // }
+                        //  if (!isNaN(cantidad) && !isNaN(costo)) {
+                        let monto = cantidad * costo;  // Calculamos el monto
+                        // Sumar el monto al total
+                        totalMonto += monto;
+                        // console.log("2. totalMonto: ", totalMonto, "  monto:", monto);
+                        actualizarTotal();  // Actualizamos el label con el nuevo total
+                        // }
                         monto = cantidad * costo;//entrada, se calcula el monto
-                        agregarDetalle(codigo, cantidad, costo, monto);                           
+                        agregarDetalle(codigo, cantidad, costo, monto);
                     }
-                    
+
 
                 }
             }//fin if validarCampos
-            else {                
+            else {
                 mostrarMensaje('Complete todos los campos del encabezado antes de agregar un artículo', 'warning');
                 return;
             }
@@ -721,7 +645,7 @@
     }
     // Función para obtener el valor limpio del input (sin comas)
     function obtenerValorLimpio(input) {
-      //  console.log("INPUT LIMPIAR: ", input)
+        //  console.log("INPUT LIMPIAR: ", input)
         // return input.value.replace(/,/g, '');  // Eliminar comas del valor al obtenerlo
         return input.replace(',', '');
     }
@@ -730,8 +654,11 @@
     function desactivarEncabezado() {
         $('#txtNumDoc').prop('disabled', true);
         $('#txtProv').prop('disabled', true);
+        //$("#txtProv").attr('disabled', true);
         $('#cbxTipoMov').prop('disabled', true);
         $('#txtMotivo').prop('disabled', true);
+        $('#txtResponsable').prop('disabled', true);
+        $('#cbxRestaurante').prop('disabled', true);
     }
 
     // Función para habilitar los campos del encabezado (si se elimina el último artículo)
@@ -740,34 +667,70 @@
         $('#txtProv').prop('disabled', false);
         $('#cbxTipoMov').prop('disabled', false);
         $('#txtMotivo').prop('disabled', false);
+        $('#txtResponsable').prop('disabled', false);
+        $('#cbxRestaurante').prop('disabled', false);
         $('#txtMotivo').removeClass('is-invalid');
     }
 
     function ValidarEncabezado() {
         var isValid = true;
-       var num = $('#txtNumDoc').val();
-        var num2 = $('#txtProv').val();
-        var num3 =$('#cbxTipoMov').val();
-        var num4 = $('#txtMotivo').val();       
+        //validar para v2
+        var num = $('#txtNumDoc').val();
+        //var num2 = $('#txtProv').val();
+        var num2 = $('#txtProv option:selected').text();
+        var num3 = $('#cbxTipoMov').val();
+        var num4 = $('#txtMotivo').val();
+        //se agregan v3
+        var num5 = $('#txtResponsable').val();
+        var num6 = $('#cbxRestaurante').val();
         var errorMotivo = document.getElementById('errorMotivo');
         //if ($('#txtNumDoc').val() === '' || $('#txtProv').val() === '' || $('#cbxTipoMov').val() === '' || $('#txtMotivo').val() === '') {
 
 
         // Validar si los campos de encabezado están vacíos
-        if (!num || !num2 || !num3) {//|| !num4
-            isValid = false;
-        }
+        /*  if (!num || !num2 || !num3) {//|| !num4
+              isValid = false;
+          }
+          var tipoFiltro = $("#cbxTipoMov").val();
+          let listaTipoFiltro = tipoFiltro.split("-");
+          if (listaTipoFiltro[0] === '3' && !num4) {//cuando sea salida debe validar el campo de motivo
+              $('#txtMotivo').addClass('is-invalid'); // Marca el campo como inválido
+              //$('</br> <span class="text-danger">El campo Motivo es obligatorio cuando es una Salida.</span>').insertAfter('#txtMotivo');
+              errorMotivo.style.display = 'block'; // Mostrar mensaje de error
+              isValid = false;
+          } else {
+              $('#txtMotivo').removeClass('is-invalid');
+              errorMotivo.style.display = 'none'; // Ocultar mensaje de error si es válido
+          }     */
+
+        //validar para v3
         var tipoFiltro = $("#cbxTipoMov").val();
-        let listaTipoFiltro = tipoFiltro.split("-");
-        if (listaTipoFiltro[0] === '3' && !num4) {//cuando sea salida debe validar el campo de motivo          
-            $('#txtMotivo').addClass('is-invalid'); // Marca el campo como inválido
-            //            $('</br> <span class="text-danger">El campo Motivo es obligatorio cuando es una Salida.</span>').insertAfter('#txtMotivo');            
-            errorMotivo.style.display = 'block'; // Mostrar mensaje de error
-            isValid = false;
-        } else {
-            $('#txtMotivo').removeClass('is-invalid');
-            errorMotivo.style.display = 'none'; // Ocultar mensaje de error si es válido
-        }       
+        let listaTipoFiltro = tipoFiltro.split("-");//categoria-tipomov
+        switch (listaTipoFiltro[1]) {
+            case "8"://compras
+                if (!num || !num2 || !num3) {
+                    isValid = false;
+                }
+                break;
+            case "3": //traslado-entrada
+                if (!num6 || !num3) {
+                    isValid = false;
+                }
+                break;
+            case "4"://traslado-salida
+                if (!num6 || !num3 || !num4) {
+                    isValid = false;
+                }
+                break;
+            case "9"://desecho
+                if (!num5 || !num3 || !num4) {
+                    isValid = false;
+                }
+                break;
+            default:
+                isValid = false;
+        }
+
         return isValid;
     }
 
@@ -806,19 +769,19 @@
         actualizarTabla();
 
         // Limpiar los campos
-      //  $('#txtCantidad').val('');
-     //   $('#txtCosto').val('');
+        //  $('#txtCantidad').val('');
+        //   $('#txtCosto').val('');
         $('#txtMotivo').removeClass('is-invalid');
         // Reiniciar selects a su estado predeterminado (eliminar selección)
         // $('#cbxArti').val('').trigger('change');
         //  $('#cbxArti').val(null).trigger('change');  // Restablecer el select usando Select2
         // Limpiar el select2 correctamente
-      //  $('#cbxArti').val("0").trigger('change.select2');
-      //  $('#cbxArti').parent().find('.select2-search__field').val('').trigger('change');
-      //  $('#cbxArti').val(null).trigger('change');
-      //  $("#cbxArti").val("");
+        //  $('#cbxArti').val("0").trigger('change.select2');
+        //  $('#cbxArti').parent().find('.select2-search__field').val('').trigger('change');
+        //  $('#cbxArti').val(null).trigger('change');
+        //  $("#cbxArti").val("");
         //  $('#cbxArti').val('');  // Restablece el select nativo
-    //    $('#cbxArti').val(null).trigger('change.select2');  // Limpiar y notificar a Select2 del cambio
+        //    $('#cbxArti').val(null).trigger('change.select2');  // Limpiar y notificar a Select2 del cambio
         //  console.log("COMBO: ",$('#cbxArti').val());  // Asegúrate de que el valor es null o vacío
         limpiarCamposArticulo();
 
@@ -834,18 +797,18 @@
         //ToString("#,##0.00")
         // Recorrer la lista de detalles y agregar cada fila
         //v1 sin formato de miles y decimales
-       /* $.each(detalles, function (index, detalle) {
-            tbody.append(`
-                            <tr>
-                                <td>${detalle.CodMateria}</td>
-                                <td>${detalle.Cantidad}</td>
-                                <td>${detalle.Costo}</td>
-                                  <td>${detalle.Monto}</td>
-                                <td><button type="button" class="btn btn-primary" onclick="eliminarArticulo(${index})">Eliminar</button></td>
-                            </tr>
-                        `);
-        });
-        */
+        /* $.each(detalles, function (index, detalle) {
+             tbody.append(`
+                             <tr>
+                                 <td>${detalle.CodMateria}</td>
+                                 <td>${detalle.Cantidad}</td>
+                                 <td>${detalle.Costo}</td>
+                                   <td>${detalle.Monto}</td>
+                                 <td><button type="button" class="btn btn-primary" onclick="eliminarArticulo(${index})">Eliminar</button></td>
+                             </tr>
+                         `);
+         });
+         */
         $.each(detalles, function (index, detalle) {
             // Formatea el costo y el monto con separadores de miles y 4 decimales
             let costoFormateado = detalle.Costo.toLocaleString('en-US', {
@@ -877,7 +840,7 @@
         console.log("montoeliminar:", montoEliminar, " totalMonto:", totalMonto)
         // Restar el monto del total
         totalMonto -= montoEliminar;
-       // console.log("montoeliminar:", montoEliminar, " totalMonto:", totalMonto)
+        // console.log("montoeliminar:", montoEliminar, " totalMonto:", totalMonto)
         // Eliminar artículo de la lista
         detalles.splice(index, 1);
         actualizarTotal();
@@ -892,25 +855,25 @@
         $('#cbxArti').val(null).trigger('change.select2');
 
         // O forzar el vaciado de las opciones seleccionadas
-     //   $('#cbxArti').val('').empty();   // Vacía las opciones del select
-      //  $('#cbxArti').select2({ data: [] });  // Reinicia el select2 si es necesario
+        //   $('#cbxArti').val('').empty();   // Vacía las opciones del select
+        //  $('#cbxArti').select2({ data: [] });  // Reinicia el select2 si es necesario
 
         // Asegurarse de que el dropdown esté listo para seleccionar un nuevo artículo
         $('#cbxArti').append('<option value="" disabled selected>--Seleccione--</option>');
 
         // Actualiza visualmente el select con select2
-        $('#cbxArti').trigger('change.select2');      
+        $('#cbxArti').trigger('change.select2');
     }
     // Función para actualizar el label con el total calculado
     function actualizarTotal() {
         // $('#totalMonto').text(totalMonto.toFixed(4));
         // Formatear el totalMonto con separadores de miles y 4 decimales
         let totalFormateado = totalMonto.toLocaleString('en-US', { //es- ES
-            minimumFractionDigits: 4,
+            minimumFractionDigits: 2,
             maximumFractionDigits: 4
         });
 
-       // console.log("Total Monto formateado: ", totalFormateado);  // Verificar que esté formateado correctamente
+        // console.log("Total Monto formateado: ", totalFormateado);  // Verificar que esté formateado correctamente
         $('#totalMonto').text(totalFormateado);  // Actualizar el span con el total formateado
     }
 </script>

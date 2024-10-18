@@ -19,7 +19,6 @@ namespace InventarioArtMenores.Models.Report
         public decimal Monto { get; set; }
         public DateTime UC_Fecha { get; set; }
         public string TipoNivelInv { get; set; }
-       // public decimal TipoNivelInv { get; set; }
         public decimal UC_Cantidad { get; set; }
         public decimal UC_Costo { get; set; }
         public decimal UC_Monto { get; set; }

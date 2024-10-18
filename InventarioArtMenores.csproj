@@ -135,6 +135,7 @@
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\Inventario.cs" />
     <Compile Include="Models\Local.cs" />
+    <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\Report\KardexViewModel.cs" />
     <Compile Include="Models\Report\SaldosViewModel.cs" />
     <Compile Include="Models\TipoMovimiento.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Repos\RepoHistorico.cs" />
     <Compile Include="Repos\RepoInventario.cs" />
     <Compile Include="Repos\RepoLocal.cs" />
+    <Compile Include="Repos\RepoProveedor.cs" />
     <Compile Include="Repos\RepoTipoMov.cs" />
     <Compile Include="Repos\RepoUsuario.cs" />
   </ItemGroup>

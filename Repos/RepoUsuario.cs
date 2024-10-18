@@ -10,8 +10,8 @@ namespace InventarioArtMenores.Repos
 {
     public class RepoUsuario
     {
-       // string connectionString = Properties.Settings.Default.ConectionStringLogin;//volver a poner Producción
-        string connectionString = Properties.Settings.Default.ConectionStringLoginTest;//quitar test
+        string connectionString = Properties.Settings.Default.ConectionStringLogin;//volver a poner Producción
+       // string connectionString = Properties.Settings.Default.ConectionStringLoginTest;//quitar test
         bool ambienteTest = Properties.Settings.Default.ambienteTest; //si es 1 es xq es ambiente de test      
         string pathLogs = Properties.Settings.Default.PathLog;//para los logs
 
@@ -137,7 +137,7 @@ namespace InventarioArtMenores.Repos
                     DateTime hoy = DateTime.Now;
                     //log
                     using (StreamWriter writer = new StreamWriter(pathLogs, true))
-                    { writer.WriteLine("****Error Usuario Get() USER_NAME:" + cod + " fecha:" + hoy + " error: " + ex.ToString()); }
+                    { writer.WriteLine("****Error GetUserLocal() USER_NAME:" + cod + " fecha:" + hoy + " error: " + ex.ToString()); }
                     //fin
                 }
                 finally

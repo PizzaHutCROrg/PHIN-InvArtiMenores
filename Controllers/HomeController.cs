@@ -36,7 +36,7 @@ namespace InventarioArtMenores.Controllers
                 //obtenemos la lista de los locales asociados
                List<string> ltsCodRest = repoUsuario.GetUserLocal(Session["UserInvAM"].ToString());
 
-                ViewBag.Tiendas = new SelectList(repoLocal.GetAllLocalesCBX(ltsCodRest), "filtrocbx", "filtrocbx");
+                ViewBag.Tiendas = new SelectList(repoLocal.GetAllLocalesCBX(ltsCodRest), "filtrocbx", "filtrocbx"); 
                 return View();
             }
         }

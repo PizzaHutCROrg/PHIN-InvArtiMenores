@@ -18,58 +18,6 @@ namespace InventarioArtMenores.Repos
         string pathLogs = Properties.Settings.Default.PathLog;//para los logs
         public RepoHistorico() { }
 
-        public int NewRegistroMov(HistoMovEnca obj)//agregamos el movimiento al histórico
-        {
-            string sentencia = "";
-            string tablaTest = "";
-            int res = 0;
-            /*if (ambienteTest)
-            {
-                tablaTest = "Test";
-            }
-            using (SqlConnection cnn = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    sentencia = "insert into UX_HistoricoMovimiento" + tablaTest + " (CodRest,CodMateria,DesMateria,TipoMov,Cantidad,Comentario,NumDoc,Proveedor,Motivo,Costo,Username) ";                  
-                    sentencia += "values(@CodRest,@CodMateria,@DesMateria,@TipoMov,@Cantidad,@Comentario,@NumDoc,@Proveedor,@Motivo,@Costo,@Username) ";
-                    SqlCommand cmd = new SqlCommand(sentencia, cnn);
-                    cmd.Parameters.AddWithValue("@CodRest", obj.CodRest);
-                    cmd.Parameters.AddWithValue("@CodMateria", obj.Detalles.CodMateria);
-                    cmd.Parameters.AddWithValue("@DesMateria", obj.Detalles.DesMateria);
-                    cmd.Parameters.AddWithValue("@TipoMov", obj.TipoMov);
-                    cmd.Parameters.AddWithValue("@Cantidad", obj.Detalles.Cantidad);
-                    cmd.Parameters.AddWithValue("@Comentario", obj.Detalles.Comentario);                   
-                    cmd.Parameters.AddWithValue("@NumDoc", obj.NumDoc);
-                    cmd.Parameters.AddWithValue("@Proveedor", obj.Proveedor);
-                    cmd.Parameters.AddWithValue("@Motivo", obj.Motivo);
-                    cmd.Parameters.AddWithValue("@Costo", obj.Detalles.Costo);
-                    cmd.Parameters.AddWithValue("@Username", obj.Username);
-                    cnn.Open();
-                    res = cmd.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-
-                    cnn.Dispose();
-                    cnn.Close();
-                    //ex.ToString();
-                    //log
-                    DateTime hoy = DateTime.Now;
-                    using (StreamWriter writer = new StreamWriter(pathLogs, true))
-                    { writer.WriteLine("**Ocurrió un error NewRegistroMov() CodRest:" + obj.CodRest + " CodMateria:" + obj.Detalles.CodMateria + " Tipo:" +obj.TipoMov + " fecha:" + hoy + " ex:" + ex.ToString()); }
-                    //fin 
-                }
-                finally
-                {
-                    cnn.Dispose();
-                    cnn.Close();
-
-                }
-            }*/
-            return res;
-        }
-
         public int NewListRegMov(HistoMovEnca articulos, string username)//agregamos los artículos que vienen en el registro de movimiento (encabezado y detalle)
         {
             string sentencia = "", codrest = "", codMateria = "";           
@@ -90,8 +38,8 @@ namespace InventarioArtMenores.Repos
                     {
                         // Asignar la transacción al comando
                         //cnn.tra = transaction;                     
-                        sentencia = "insert into UX_HistoricoMovimiento" + tablaTest + " (CodRest,CodMateria,DesMateria,TipoMov,Cantidad,Comentario,Username,NumDoc,Proveedor,Motivo,Costo,Monto) ";
-                        sentencia += "values(@CodRest,@CodMateria,@DesMateria,@TipoMov,@Cantidad,@Comentario,@Username,@NumDoc,@Proveedor,@Motivo,@Costo,@Monto) ";
+                        sentencia = "insert into UX_HistoricoMovimiento" + tablaTest + " (CodRest,CodMateria,DesMateria,TipoMov,Cantidad,Comentario,Username,NumDoc,Proveedor,Motivo,Costo,Monto,Responsable) ";
+                        sentencia += "values(@CodRest,@CodMateria,@DesMateria,@TipoMov,@Cantidad,@Comentario,@Username,@NumDoc,@Proveedor,@Motivo,@Costo,@Monto,@Responsable) ";
                         // Se pasa la transacción en el constructor del SqlCommand
                         using (SqlCommand cmd = new SqlCommand(sentencia, cnn, transaction))
                         {
@@ -110,6 +58,7 @@ namespace InventarioArtMenores.Repos
                             cmd.Parameters.AddWithValue("@Motivo", articulos.Motivo);
                             cmd.Parameters.AddWithValue("@Costo", item.Costo);
                             cmd.Parameters.AddWithValue("@Monto", item.Monto);
+                            cmd.Parameters.AddWithValue("@Responsable", articulos.Responsable);
 
                             codMateria = item.CodMateria;
                             codrest = item.CodRest;    
@@ -130,7 +79,7 @@ namespace InventarioArtMenores.Repos
                     //log
                     DateTime hoy = DateTime.Now;
                     using (StreamWriter writer = new StreamWriter(pathLogs, true))
-                    { writer.WriteLine("**Ocurrió un error NewListHistorico() CodRest:" + codrest + " CodMateria:" + codMateria + " NumDoc:" + articulos.NumDoc +" TipoMov:"+articulos.TipoMov+" fecha:" + hoy + " ex:" + ex.ToString()); }
+                    { writer.WriteLine("**Ocurrió un error NewListRegMov() CodRest:" + codrest + " CodMateria:" + codMateria + " NumDoc:" + articulos.NumDoc +" TipoMov:"+articulos.TipoMov+" fecha:" + hoy + " ex:" + ex.ToString()); }
                     //fin 
                 }
                 finally
@@ -330,7 +279,7 @@ namespace InventarioArtMenores.Repos
             return resultados;
         }
 
-        public List<KardexViewModel> KarGetHistArticulo(string codrest, string codMateria)//obtener el número de línea
+        public List<KardexViewModel> KarGetHistArticulo(string codrest, string codMateria)//obtener datos del artículo
         {
 
             string tablaTest = "";            
@@ -345,7 +294,7 @@ namespace InventarioArtMenores.Repos
                 {
                     //top 30
                     string sentencia = "select CodMateria, DesMateria, Cantidad, isnull(Costo, 0) Costo, isnull(Monto, 0) monto, Comentario, NumDoc, ";
-                    sentencia += "Proveedor, Motivo, SUM(Cantidad) OVER (ORDER BY FechaReg ROWS UNBOUNDED PRECEDING) AS AcumuladoCantidad, FechaReg ";
+                    sentencia += "Proveedor, Motivo, SUM(Cantidad) OVER (ORDER BY FechaReg ROWS UNBOUNDED PRECEDING) AS AcumuladoCantidad, FechaReg, Responsable ";
                     sentencia += "from UX_HistoricoMovimiento" + tablaTest + " where CodRest =@CodRest and CodMateria =@CodMateria order by FechaReg desc"; 
                     SqlCommand cmd = new SqlCommand(sentencia, cnn);
                     cmd.Parameters.AddWithValue("@CodRest", codrest);
@@ -369,6 +318,7 @@ namespace InventarioArtMenores.Repos
                         obj.Motivo = registros["Motivo"].ToString().Trim();
                         obj.Acumulado = Convert.ToDecimal(registros["AcumuladoCantidad"]);
                         obj.FechaReg = Convert.ToDateTime(registros["FechaReg"]);
+                        obj.Responsable = registros["Responsable"].ToString().Trim();
                         lst.Add(obj);
                     }
                 }
@@ -454,6 +404,54 @@ namespace InventarioArtMenores.Repos
             }
 
             return lst;
+        }
+
+        public string GetMaxNumDoc(string codrest,int tipo )//obtener el número max de documento sobre ese tipo de movimiento
+        {
+
+            string tablaTest = "";
+            string existe ="0";
+            if (ambienteTest)
+            {
+                tablaTest = "Test";
+            }
+            using (SqlConnection cnn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    //top 30
+                    string sentencia = "select COALESCE(count(id)+1, 1) AS numdoc from UX_HistoricoMovimiento" + tablaTest + " where CodRest =@CodRest and tipoMov =@tipoMov "; //and TipoMov <> 1
+                    SqlCommand cmd = new SqlCommand(sentencia, cnn);
+                    cmd.Parameters.AddWithValue("@CodRest", codrest);
+                    cmd.Parameters.AddWithValue("@tipoMov", tipo);
+
+                    cnn.Open();
+                    SqlDataReader registros = cmd.ExecuteReader();
+                    while (registros.Read())
+                    {
+                        existe = registros["numdoc"].ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    cnn.Dispose();
+                    cnn.Close();
+                    // return BadRequest(ex.Message);
+                    //log
+                    DateTime hoy = DateTime.Now;
+                    using (StreamWriter writer = new StreamWriter(pathLogs, true))
+                    { writer.WriteLine("**Ocurrió un error GetMaxNumDoc() CodRest:" + codrest+" TipoMov:"+ tipo  + " fecha:" + hoy + " ex:" + ex.ToString()); }
+                    //fin 
+
+                }
+                finally
+                {
+                    cnn.Dispose();
+                    cnn.Close();
+                }
+            }
+
+            return existe;
         }
 
     }

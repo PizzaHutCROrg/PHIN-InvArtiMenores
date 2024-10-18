@@ -14,6 +14,8 @@ namespace InventarioArtMenores.Controllers
         RepoHistorico repoHist = new RepoHistorico();
         RepoControl repoControl = new RepoControl();
         RepoTipoMov repoTipo = new RepoTipoMov();
+        RepoLocal repoLocal = new RepoLocal();
+        RepoProveedor repoprov = new RepoProveedor();
         public static string tipoInv = "Menores";
         public ActionResult Index()
         {
@@ -53,7 +55,11 @@ namespace InventarioArtMenores.Controllers
                    {
                        Detalles = new List<HistoMov>() // Inicializa lista vacía
                    };
-                  return View(model);
+
+                ViewBag.Tiendas = new SelectList(repoLocal.GetAllRest(Session["codResArti"].ToString()), "filtrocbx", "filtrocbx"); //cargamos los restaurantes
+                ViewBag.Prov = new SelectList(repoprov.GetAllProveedorCbx(), "Descripcion", "Descripcion"); //cargamos los proovedores
+
+                return View(model);
                 
             }
            
@@ -62,7 +68,7 @@ namespace InventarioArtMenores.Controllers
 
         [HttpPost]
         //string txtNumDoc,string txtProv, string txtMotivo, string cbxTipoMov,   HistoMovEnca model
-        public ActionResult Index(HistoMovEnca request)//string cbxArti, string txtCantidad,, string txtCosto
+        public ActionResult Index(HistoMovEnca request)
         {       
            // bool bandera = false;
 
@@ -84,71 +90,93 @@ namespace InventarioArtMenores.Controllers
             //}
             //else
             //{
-            if (ModelState.IsValid)
-            {
-                string[] tipoMov = request.TipoMov.Split('-');//idCategoria-TipoMov-desc
-                string txtMotivo = request.Motivo;
-                string txtNumDoc = request.NumDoc;
-                string txtProv = request.Proveedor;
-                string codRest = Session["codResArti"].ToString();
-                string username = Session["UserInvAM"].ToString();
+            try {            
+                if (ModelState.IsValid)
+                {
+                    string[] tipoMov = request.TipoMov.Split('-');//idCategoria-TipoMov-descripción
+                    string txtMotivo = request.Motivo;
+                    string txtNumDoc = request.NumDoc;
+                    string txtProv = request.Proveedor;
+                    string codRest = Session["codResArti"].ToString();
+                    string username = Session["UserInvAM"].ToString();
+                    string responsable = request.Responsable;
 
 
-                // 2= Entrada, 3= Salida
+                    // 2= Entrada, 3= Salida
 
-                // Procesar la información
-                 if (tipoMov[0] == "3" && string.IsNullOrEmpty(txtMotivo))//salida
-                 {
-                     //TempData["Message"] = "El movimiento de Salida debe tener un motivo";
-                    return Json(new { success = false });
-                }
-                 else
-                 {
-                    if (string.IsNullOrEmpty(txtMotivo))
-                    {
-                        txtMotivo = tipoMov[2];
-                    }
-
-                    //creamos el objeto para ser enviado a la tabla de histórico
-                    //encabezado
-                    HistoMovEnca objEnca = new HistoMovEnca();
-                    objEnca.NumDoc = txtNumDoc;
-                    objEnca.Proveedor = txtProv;
-                    objEnca.Motivo = txtMotivo;
-                    objEnca.TipoMov = tipoMov[1];
-                    objEnca.CodRest = codRest;
-                    //objEnca.Detalles = obj;
-                    objEnca.Username = username;
-                    List<HistoMov> lts = new List<HistoMov>();//contiene los artículos agregados al detalle
-                    foreach (HistoMov arti in request.Detalles)//obtenemos los artículos agregados al detalle
-                    {
-                        var codArti = arti.CodMateria.Split('-');//codigo-desc
-                        HistoMov obj = new HistoMov();
-                        obj.CodRest = codRest;
-                        obj.Costo = Convert.ToDecimal(arti.Costo);
-                        obj.CodMateria = codArti[0];
-                        obj.DesMateria = codArti[1];
-                        obj.Cantidad = Convert.ToDecimal(arti.Cantidad);
-                        obj.Monto = arti.Monto;
-                        if (tipoMov[0] == "2")//entrada
+                    // Procesar la información
+                     if (tipoMov[0] == "3" && string.IsNullOrEmpty(txtMotivo))//salida
+                     {
+                         //TempData["Message"] = "El movimiento de Salida debe tener un motivo";
+                        return Json(new { success = false });
+                     }
+                     else
+                     {
+                        if (string.IsNullOrEmpty(txtMotivo))
                         {
-                            obj.Comentario = tipoMov[2];//obtenemos la descripción del tipoMov seleccionado
-                            if (Convert.ToDecimal(obj.Cantidad) < 0)
-                            {
-                                obj.Cantidad = Convert.ToDecimal(obj.Cantidad) * -1;
-                            }
-                            else
-                            {
-                                obj.Cantidad = Convert.ToDecimal(obj.Cantidad);
-                            }
-
+                            txtMotivo = tipoMov[2];
                         }
-                        else
+                        bool bandera = false;
+                        switch (tipoMov[1])
                         {
-                            if (tipoMov[0] == "3")//salida
+                            case "8"://compras
+                                // numeroOrden = $('#txtNumDoc').val();
+                                // proveedor = $('#txtProv option:selected').text();     //$('#txtProv').val();
+                                responsable = "";
+                                break;
+                            case "3": //traslado-entrada
+                                txtNumDoc = repoHist.GetMaxNumDoc(codRest, 3).ToString();
+                                responsable = "";
+                                bandera = true;
+                                // proveedor = $('#cbxRestaurante option:selected').text();
+                                break;
+                            case "4"://traslado-salida
+                                txtNumDoc = repoHist.GetMaxNumDoc(codRest, 4).ToString();
+                                responsable = "";
+                                bandera = true;
+                                // proveedor = $('#cbxRestaurante option:selected').text();
+                                break;
+                            case "9"://desecho
+                                txtNumDoc = repoHist.GetMaxNumDoc(codRest, 9).ToString();
+                                txtProv = "";
+                                bandera = true;
+                                // responsable = $('#txtResponsable').val();
+                                break;
+                            default:
+                                break;
+                        }
+                        if(txtNumDoc == "0" && bandera)//validamos q genere en numDoc
+                        {
+                           // TempData["Message"] = "Ocurrió un error registrando el movimiento";
+                            // return Json(new { success = false });
+                            return Json(new { success = false, message = "Ocurrió un error Obteniendo el número de documento" });
+                        }
+                        //creamos el objeto para ser enviado a la tabla de histórico
+                        //encabezado
+                        HistoMovEnca objEnca = new HistoMovEnca();
+                        objEnca.NumDoc = txtNumDoc;
+                        objEnca.Proveedor = txtProv;
+                        objEnca.Motivo = txtMotivo;
+                        objEnca.TipoMov = tipoMov[1];
+                        objEnca.CodRest = codRest;
+                        //objEnca.Detalles = obj;
+                        objEnca.Username = username;
+                        objEnca.Responsable = responsable;
+                        List<HistoMov> lts = new List<HistoMov>();//contiene los artículos agregados al detalle
+                        foreach (HistoMov arti in request.Detalles)//obtenemos los artículos agregados al detalle
+                        {
+                            var codArti = arti.CodMateria.Split('-');//codigo-desc
+                            HistoMov obj = new HistoMov();
+                            obj.CodRest = codRest;
+                            obj.Costo = Convert.ToDecimal(arti.Costo);
+                            obj.CodMateria = codArti[0];
+                            obj.DesMateria = codArti[1];
+                            obj.Cantidad = Convert.ToDecimal(arti.Cantidad);
+                            obj.Monto = arti.Monto;
+                            if (tipoMov[0] == "2")//entrada
                             {
                                 obj.Comentario = tipoMov[2];//obtenemos la descripción del tipoMov seleccionado
-                                if (Convert.ToDecimal(obj.Cantidad) > 0)
+                                if (Convert.ToDecimal(obj.Cantidad) < 0)
                                 {
                                     obj.Cantidad = Convert.ToDecimal(obj.Cantidad) * -1;
                                 }
@@ -156,31 +184,55 @@ namespace InventarioArtMenores.Controllers
                                 {
                                     obj.Cantidad = Convert.ToDecimal(obj.Cantidad);
                                 }
+
                             }
+                            else
+                            {
+                                if (tipoMov[0] == "3")//salida
+                                {
+                                    obj.Comentario = tipoMov[2];//obtenemos la descripción del tipoMov seleccionado
+                                    if (Convert.ToDecimal(obj.Cantidad) > 0)
+                                    {
+                                        obj.Cantidad = Convert.ToDecimal(obj.Cantidad) * -1;
+                                    }
+                                    else
+                                    {
+                                        obj.Cantidad = Convert.ToDecimal(obj.Cantidad);
+                                    }
+                                }
 
+                            }
+                            lts.Add(obj);//agregamos el objeto
+                        } 
+
+                        objEnca.Detalles = lts;//agregamos la nueva lista en el encabezado
+
+                        if (repoHist.NewListRegMov(objEnca, username) == 0)
+                        {
+                            // TempData["Message"] = "Ocurrió un error registrando el movimiento";
+                            // return Json(new { success = false });
+                            return Json(new { success = false, message = "Ocurrió un error registrando el movimiento" });
                         }
-                        lts.Add(obj);//agregamos el objeto
-                    } 
-
-                    objEnca.Detalles = lts;//agregamos la nueva lista en el encabezado
-
-                    if (repoHist.NewListRegMov(objEnca, username) == 0)
-                    {
-                        // TempData["Message"] = "Ocurrió un error registrando el movimiento";
-                        return Json(new { success = false });
-                    }
                    
-                 }
-            }
-            else
-            {
-                //  TempData["Message"] = "Favor de completar los datos";
-                return Json(new { success = false });
-            }
+                     }
+                }
+                else
+                {
+                    //TempData["Message"] = "Favor de completar los datos";
+                    // return Json(new { success = false });
+                    return Json(new { success = false, message = "Favor de completar los datos" });
+                }
         
-            ViewBag.OptionsList = repoArti.GetListAllArticulo(Session["codResArti"].ToString());
-            ViewBag.OptionsTipo = new SelectList(repoTipo.GetTipos(), "filtrocbx", "Descripcion");
-            return Json(new { success = true });
+                ViewBag.OptionsList = repoArti.GetListAllArticulo(Session["codResArti"].ToString());
+                ViewBag.OptionsTipo = new SelectList(repoTipo.GetTipos(), "filtrocbx", "Descripcion");
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                //TempData["Message"] = "Ocurrió un error registrando el movimiento";
+                //return Json(new { success = false });
+                return Json(new { success = false, message = "Ocurrió un error registrando el movimiento." });
+            }
         }
 
         // Acción para calcular el monto desde la base de datos

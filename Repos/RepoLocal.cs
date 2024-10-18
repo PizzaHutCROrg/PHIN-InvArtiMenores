@@ -71,16 +71,17 @@ namespace InventarioArtMenores.Repos
             return lst;
         }
 
-        public string GetDescripcion() //llenar el combo con los locales
+        public List<Local> GetAllRest(string codrest) //llenar el combo con todos los restaurantes menos el q está logueado
         {
             List<Local> lst = new List<Local>();
             string sentencia = "";
 
             using (SqlConnection cnn = new SqlConnection(connectionString))
             {
-                sentencia = "select Descripcion from GPizzaHut.dbo.Locales where activo =1 ";
+                sentencia = "select CodRest, Descripcion from GPizzaHut.dbo.Locales where activo =1 and codRest <> @codRest ";
                 sentencia += "order by CodRest asc";
                 SqlCommand cmd = new SqlCommand(sentencia, cnn);
+                cmd.Parameters.AddWithValue("@codRest", codrest);
                 cnn.Open();
                 SqlDataReader registros = cmd.ExecuteReader();
                 try
@@ -112,7 +113,7 @@ namespace InventarioArtMenores.Repos
                     cnn.Close();
                 }
             }
-            return "";
+            return lst;
         }
 
     }

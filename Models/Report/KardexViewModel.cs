@@ -15,6 +15,7 @@ namespace InventarioArtMenores.Models.Report
         public string Comentario { get; set; }
         public string NumDoc { get; set; }
         public string Proveedor { get; set; }
+        public string Responsable { get; set; }
         public string Motivo { get; set; }
         //  [DisplayFormat(DataFormatString = "{0:n4}")]
         public decimal Costo { get; set; }
