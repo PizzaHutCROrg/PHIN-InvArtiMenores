@@ -20,7 +20,7 @@ namespace InventarioArtMenores.Controllers
         public ActionResult Index()
         {
 
-            //Session["UserInvAM"] = "test";//quitar
+           // Session["UserInvAM"] = "test";//quitar
             //Session["UserNomInvAM"] = "Yess-test";//quitar
             //Session["codResArti"] = "40"; //"36";//quitar
             //Session["desResArti"] = "Rohrmoser";//"Cartago"; //quitar
@@ -142,6 +142,12 @@ namespace InventarioArtMenores.Controllers
                                 bandera = true;
                                 // responsable = $('#txtResponsable').val();
                                 break;
+                            //case "10"://recolección
+                            //    txtNumDoc = repoHist.GetMaxNumDoc(codRest, 10).ToString();
+                            //    txtProv = "";
+                            //    bandera = true;
+                            //    // responsable = $('#txtResponsable').val();
+                            //    break;
                             default:
                                 break;
                         }

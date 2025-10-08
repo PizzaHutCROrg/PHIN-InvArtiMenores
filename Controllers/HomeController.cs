@@ -26,7 +26,7 @@ namespace InventarioArtMenores.Controllers
              Session["codResArti"] = null;//código de la tienda seleccionada           
              Session["desResArti"] = null;
 
-            //Session["UserInvAM"] = "test";//quitar
+            Session["UserInvAM"] = "test";//quitar
             if (Session["UserInvAM"] == null)
             {
                 return RedirectToAction("Index", "Login");

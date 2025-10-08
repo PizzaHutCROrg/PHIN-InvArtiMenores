@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|c:\\users\\yesseniamurillo\\source\\repos\\pizzahutcr\\phin-invartimenores\\repos\\repoarticulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\repos\\repoarticulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:repos\\repoarticulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -39,11 +39,11 @@
       "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:properties\\settings.settings||{6D2695F9-5365-4A78-89ED-F205C045BFE6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\models\\histomov.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|c:\\users\\yesseniamurillo\\source\\repos\\pizzahutcr\\phin-invartimenores\\models\\histomov.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:models\\histomov.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\models\\control.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|c:\\users\\yesseniamurillo\\source\\repos\\pizzahutcr\\phin-invartimenores\\models\\control.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8524AEAE-B739-4183-A9A3-C567699876FA}|InventarioArtMenores.csproj|solutionrelative:models\\control.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -159,7 +159,8 @@
               "ViewState": "AgIAAFQAAAAAAAAAAAAwwGcAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-29T21:40:12.216Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -172,7 +173,8 @@
               "ViewState": "AgIAAKIAAAAAAAAAAAAAAPEBAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-08-29T20:36:15.968Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -185,7 +187,8 @@
               "ViewState": "AgIAAA4AAAAAAAAAAAAAwBYAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-04T15:49:05.155Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -211,7 +214,8 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-05T22:36:12.502Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -224,7 +228,8 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFsAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-29T21:48:17.268Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -240,7 +245,8 @@
               "RelativeToolTip": "Models\\Inventario.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T15:34:45.502Z"
+              "WhenOpened": "2024-09-06T15:34:45.502Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -252,7 +258,8 @@
               "RelativeToolTip": "Views\\Home\\Index.cshtml",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAAC0AAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-04T16:35:57.853Z"
+              "WhenOpened": "2024-09-04T16:35:57.853Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -264,7 +271,8 @@
               "RelativeToolTip": "Repos\\RepoControl.cs",
               "ViewState": "AgIAAHQAAAAAAAAAAAApwIMAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-05T17:56:48.588Z"
+              "WhenOpened": "2024-09-05T17:56:48.588Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -276,7 +284,8 @@
               "RelativeToolTip": "Models\\ArticuloViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-02T17:03:55.968Z"
+              "WhenOpened": "2024-09-02T17:03:55.968Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -286,7 +295,7 @@
               "RelativeDocumentMoniker": "Repos\\RepoArticulo.cs",
               "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Repos\\RepoArticulo.cs",
               "RelativeToolTip": "Repos\\RepoArticulo.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAswBkAAABLAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAswIsAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-04T17:06:11.221Z",
               "EditorCaption": ""
@@ -300,7 +309,8 @@
               "ToolTip": "C:\\Users\\yesseniamurillo\\source\\repos\\pizzahutcr\\PHIN-InvArtiMenores\\Properties\\Settings.settings",
               "RelativeToolTip": "Properties\\Settings.settings",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002767|",
-              "WhenOpened": "2025-04-23T19:07:25.07Z"
+              "WhenOpened": "2025-04-23T19:07:25.07Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -312,7 +322,8 @@
               "RelativeToolTip": "Repos\\RepoInventario.cs",
               "ViewState": "AgIAADoBAAAAAAAAAAD4v0UBAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-29T21:47:52.936Z"
+              "WhenOpened": "2024-08-29T21:47:52.936Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -324,7 +335,8 @@
               "RelativeToolTip": "Models\\HistoMov.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-02T18:15:02.711Z"
+              "WhenOpened": "2025-10-02T18:15:02.711Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -336,7 +348,8 @@
               "RelativeToolTip": "Models\\Control.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T15:35:33.32Z"
+              "WhenOpened": "2024-09-06T15:35:33.32Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -384,7 +397,8 @@
               "RelativeToolTip": "Repos\\RepoHistorico.cs",
               "ViewState": "AgIAACUAAAAAAAAAAAArwCgAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-04T15:44:33.409Z"
+              "WhenOpened": "2024-09-04T15:44:33.409Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

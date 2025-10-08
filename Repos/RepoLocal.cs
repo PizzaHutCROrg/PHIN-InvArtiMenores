@@ -78,8 +78,17 @@ namespace InventarioArtMenores.Repos
 
             using (SqlConnection cnn = new SqlConnection(connectionString))
             {
-                sentencia = "select CodRest, Descripcion from GPizzaHut.dbo.Locales where activo =1 and codRest <> @codRest ";
-                sentencia += "order by CodRest asc";
+                // sentencia = "select CodRest, Descripcion from GPizzaHut.dbo.Locales where activo =1 and codRest <> @codRest ";
+                //sentencia += "order by CodRest asc";
+                sentencia = "select  CodRest COLLATE SQL_Latin1_General_CP1_CI_AS as CodRest, Descripcion COLLATE SQL_Latin1_General_CP1_CI_AS as Descripcion  " +
+ "from GPizzaHut.dbo.Locales loc " +
+ "where loc.activo =1 and loc.codRest <> @codRest " +
+ "union " +
+ "select  CodRest COLLATE SQL_Latin1_General_CP1_CI_AS as CodRest, Descripcion COLLATE SQL_Latin1_General_CP1_CI_AS as Descripcion " +
+"from UX_LocalAdicionalTest ad " +
+ "where ad.activo = 1 and ad.codRest <> @codRest order by CodRest asc";
+
+
                 SqlCommand cmd = new SqlCommand(sentencia, cnn);
                 cmd.Parameters.AddWithValue("@codRest", codrest);
                 cnn.Open();
